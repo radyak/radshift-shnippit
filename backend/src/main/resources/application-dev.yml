@@ -1,0 +1,12 @@
+spring.datasource.hikari:
+  connectionTimeout: 20000
+  maximumPoolSize: 5
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:4321/shnippit
+    username: postgres
+    password: password
+
+  # dev only
+  jpa.hibernate.ddl-auto: create
