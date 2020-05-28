@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>net.fvogel.radshift</groupId>
+    <artifactId>shnippit-frontend</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>shnippit-frontend</name>
+    <description>Shnippit Backend</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <angular.baseurl>/</angular.baseurl>
+        <angular.jarfolder>/</angular.jarfolder>
+        <root.path>${basedir}</root.path>
+    </properties>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <failOnError>true</failOnError>
+                    <followSymLinks>false</followSymLinks>
+                    <filesets>
+                        <fileset>
+                            <directory>dist</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <!-- build APP -->
+                    <execution>
+                        <id>Building APP: ng build --prod --base-href ${angular.baseurl}</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <phase>compile</phase>
+                        <configuration>
+                            <executable>node</executable>
+                            <arguments>
+                                <argument>--max_old_space_size=2048</argument>
+                                <argument>${root.path}/node_modules/@angular/cli/bin/ng</argument>
+                                <argument>build</argument>
+                                <argument>--prod</argument>
+                                <argument>--base-href</argument>
+                                <argument>${angular.baseurl}</argument>
+                                <argument>--no-progress</argument>
+                                <argument>--output-path=${project.build.directory}/classes/public${angular.jarfolder}
+                                </argument>
+                            </arguments>
+                            <workingDirectory>${root.path}</workingDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>default-resources</id>
+                            <phase>none</phase>
+                        </execution>
+                        <execution>
+                            <id>default-testResources</id>
+                            <phase>none</phase>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>default-compile</id>
+                            <phase>none</phase>
+                        </execution>
+                        <execution>
+                            <id>default-testCompile</id>
+                            <phase>none</phase>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>default-test</id>
+                            <phase>none</phase>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
