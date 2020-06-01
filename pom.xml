@@ -9,8 +9,11 @@
 	<name>shnippit-parent</name>
 	<description>Radshift Shnippit Root</description>
 
+	<packaging>pom</packaging>
+
     <modules>
-        <module>backend</module>
+		<module>frontend</module>
+		<module>backend</module>
     </modules>
 
 </project>
