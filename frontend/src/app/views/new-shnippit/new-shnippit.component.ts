@@ -1,6 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {faSave, faTimes} from '@fortawesome/free-solid-svg-icons'
+import {faSave, faCog} from '@fortawesome/free-solid-svg-icons'
 import {BackendService} from "../../services/backend.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-new-shnippit',
@@ -9,10 +10,10 @@ import {BackendService} from "../../services/backend.service";
 })
 export class NewShnippitComponent implements OnInit {
     saveIcon = faSave;
-    closeIcon = faTimes;
-    text: string = 'test';
+    optionsIcon = faCog;
+    text: string = '';
 
-    constructor(private backendService: BackendService) {
+    constructor(private backendService: BackendService, private router: Router) {
     }
 
     ngOnInit(): void {
@@ -27,7 +28,7 @@ export class NewShnippitComponent implements OnInit {
         this.backendService.createShnippit({
             text: this.text
         }).subscribe(shnippit => {
-            console.log('yay', shnippit);
+            this.router.navigate([shnippit.publicId]);
         })
     }
 }

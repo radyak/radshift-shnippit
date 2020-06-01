@@ -7,4 +7,6 @@ interface ShnippitRepository: JpaRepository<Shnippit, Long> {
 
     fun countByPublicId(publicId: String): Int
 
+    fun findByPublicId(publicId: String): Shnippit?
+
 }

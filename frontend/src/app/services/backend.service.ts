@@ -15,4 +15,8 @@ export class BackendService {
             text: shnippit.text
         });
     }
+
+    public getShnippit(publicId: string): Observable<Shnippit> {
+        return this.httpClient.get<Shnippit>(`api/v1/shnippits/${publicId}`);
+    }
 }

@@ -1,6 +1,6 @@
 <div class="btn-row">
-    <button class="btn btn-warning btn-floating">
-        <fa-icon [icon]="closeIcon"></fa-icon>
+    <button class="btn btn-outline-primary btn-floating">
+        <fa-icon [icon]="optionsIcon"></fa-icon>
     </button>
 
     <button class="btn btn-primary btn-floating big" (click)="save()">
@@ -8,5 +8,5 @@
     </button>
 </div>
 
-<textarea [ngModel]="text" (ngModelChange)="onChangeText($event)">
+<textarea [ngModel]="text" (ngModelChange)="onChangeText($event)" placeholder="Enter your text ...">
 </textarea>
