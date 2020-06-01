@@ -1,0 +1,36 @@
+textarea {
+    width: 100vw;
+    height: 100vh;
+    resize: none;
+    border: none;
+    padding: 10px;
+}
+
+.btn-row {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+    text-align: right;
+}
+
+.btn-floating {
+    border-radius: 50%;
+    margin-left: 15px;
+    font-size: 1.25rem;
+
+    &.big {
+        font-size: 2rem;
+        & > fa-icon {
+            padding: 0.25em 0.35em;
+        }
+    }
+
+    & > fa-icon {
+        display: inline-block;
+        border-radius: 50%;
+        padding: 0.20em 0.30em;
+    }
+
+
+}

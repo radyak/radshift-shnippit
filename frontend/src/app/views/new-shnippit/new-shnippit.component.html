@@ -1,0 +1,12 @@
+<div class="btn-row">
+    <button class="btn btn-warning btn-floating">
+        <fa-icon [icon]="closeIcon"></fa-icon>
+    </button>
+
+    <button class="btn btn-primary btn-floating big" (click)="save()">
+        <fa-icon [icon]="saveIcon"></fa-icon>
+    </button>
+</div>
+
+<textarea [ngModel]="text" (ngModelChange)="onChangeText($event)">
+</textarea>
