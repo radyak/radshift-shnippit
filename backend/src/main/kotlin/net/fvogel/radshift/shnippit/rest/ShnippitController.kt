@@ -19,15 +19,22 @@ class ShnippitController(val shnippitRepository: ShnippitRepository,
         return shnippitRepository.findAll();
     }
 
+    @PostMapping
+    fun createShnippit(@RequestBody shnippit: Shnippit): Shnippit {
+        val shnippit = Shnippit(publicId = publicIdService.createPublicId(), text = shnippit.text);
+        return shnippitRepository.save(shnippit);
+    }
+
     @GetMapping("{publicId}")
     fun getByPublicId(@PathVariable publicId: String): Shnippit {
         val shnippit = shnippitRepository.findByPublicId(publicId) ?: throw NotFoundException();
         return shnippit
     }
 
-    @PostMapping
-    fun createShnippit(@RequestBody shnippit: Shnippit): Shnippit {
-        val shnippit = Shnippit(publicId = publicIdService.createPublicId(), text = shnippit.text);
+    @PutMapping("{publicId}")
+    fun updateShnippit(@PathVariable publicId: String, @RequestBody updatedShnippit: Shnippit): Shnippit {
+        val shnippit = shnippitRepository.findByPublicId(publicId) ?: throw NotFoundException();
+        shnippit.text = updatedShnippit.text;
         return shnippitRepository.save(shnippit);
     }
 

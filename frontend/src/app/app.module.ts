@@ -9,12 +9,14 @@ import {NewShnippitComponent} from "./views/new-shnippit/new-shnippit.component"
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { DisplayShnippitComponent } from './views/display-shnippit/display-shnippit.component';
+import { ShnippitBoardComponent } from './components/shnippit-board/shnippit-board.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         NewShnippitComponent,
-        DisplayShnippitComponent
+        DisplayShnippitComponent,
+        ShnippitBoardComponent
     ],
     imports: [
         BrowserModule,

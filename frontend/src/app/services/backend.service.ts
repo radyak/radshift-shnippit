@@ -19,4 +19,11 @@ export class BackendService {
     public getShnippit(publicId: string): Observable<Shnippit> {
         return this.httpClient.get<Shnippit>(`api/v1/shnippits/${publicId}`);
     }
+
+    public updateShnippit(shnippit: Shnippit): Observable<Shnippit> {
+        return this.httpClient.put<Shnippit>(`api/v1/shnippits/${shnippit.publicId}`, {
+            publicId: shnippit.publicId,
+            text: shnippit.text
+        });
+    }
 }

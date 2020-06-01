@@ -1,0 +1,32 @@
+textarea {
+    width: 100vw;
+    height: 100vh;
+    resize: none;
+    border: none;
+    padding: 10px;
+}
+
+.btn-row {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+    text-align: right;
+}
+
+.btn-floating {
+    border-radius: 50%;
+    margin-left: 15px;
+    font-size: 1.25rem;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+
+    &.big {
+        font-size: 2rem;
+        width: 65px;
+        height: 65px;
+    }
+
+
+}
