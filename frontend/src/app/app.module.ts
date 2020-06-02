@@ -10,6 +10,8 @@ import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { DisplayShnippitComponent } from './views/display-shnippit/display-shnippit.component';
 import { ShnippitBoardComponent } from './components/shnippit-board/shnippit-board.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
     declarations: [
@@ -24,7 +26,8 @@ import { ShnippitBoardComponent } from './components/shnippit-board/shnippit-boa
         HttpClientModule,
         NgbModule,
         FormsModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     ],
     providers: [],
     bootstrap: [AppComponent]
