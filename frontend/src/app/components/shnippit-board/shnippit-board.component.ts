@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {faCog, faSave} from "@fortawesome/free-solid-svg-icons";
+import {faCog, faSave, faEdit} from "@fortawesome/free-solid-svg-icons";
 import {BackendService} from "../../services/backend.service";
 import {Router} from "@angular/router";
 import {Shnippit} from "../../model/Shnippit.model";
@@ -14,9 +14,13 @@ export class ShnippitBoardComponent implements OnInit {
 
     saveIcon = faSave;
     optionsIcon = faCog;
+    editIcon = faEdit;
 
     @Input()
     shnippit: Shnippit;
+
+    @Input()
+    editable: boolean = false;
 
     constructor(private backendService: BackendService,
                 private router: Router,
@@ -47,12 +51,17 @@ export class ShnippitBoardComponent implements OnInit {
 
     private update() {
         this.backendService.updateShnippit(this.shnippit).subscribe(updatedShnippit => {
+            this.editable = false;
             this.shnippit = updatedShnippit;
         })
     }
 
     openOptions(content) {
         this.modalService.open(content, { centered: true });
+    }
+
+    toggleEdit() {
+        this.editable = !this.editable;
     }
 
 }

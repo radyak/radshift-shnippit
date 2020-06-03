@@ -1,4 +1,5 @@
-textarea {
+textarea,
+.shnippit-readonly{
     width: 100%;
     height: 100%;
     resize: none;
@@ -6,6 +7,7 @@ textarea {
     padding: 10px;
     font: 16px Mono;
     margin-bottom: -10px;
+    white-space: pre;
 }
 
 .btn-row {

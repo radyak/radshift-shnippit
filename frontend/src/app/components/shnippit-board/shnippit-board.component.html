@@ -3,13 +3,22 @@
         <fa-icon [icon]="optionsIcon"></fa-icon>
     </button>
 
-    <button class="btn btn-primary btn-floating big" (click)="save()">
+    <button *ngIf="editable" class="btn btn-primary btn-floating big" (click)="save()">
         <fa-icon [icon]="saveIcon"></fa-icon>
+    </button>
+    <button *ngIf="!editable" class="btn btn-primary btn-floating big" (click)="toggleEdit()">
+        <fa-icon [icon]="editIcon"></fa-icon>
     </button>
 </div>
 
-<textarea [ngModel]="shnippit?.text" (ngModelChange)="onChangeText($event)" placeholder="Enter your text ..." spellcheck="false">
+<textarea *ngIf="editable"
+          [ngModel]="shnippit?.text"
+          (ngModelChange)="onChangeText($event)"
+          placeholder="Enter your text ..."
+          spellcheck="false">
 </textarea>
+
+<div class="shnippit-readonly" *ngIf="!editable">{{ shnippit?.text }}</div>
 
 <ng-template #content let-modal>
     <div class="modal-header">

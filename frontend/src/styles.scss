@@ -22,8 +22,12 @@ html, body {
     line-height: normal !important;
 }
 
-body, textarea, .modal-content, input, .form-control {
+body, .modal-content, input, .form-control {
     background: $dark-green !important;
+    color: $light-green !important;
+}
+textarea {
+    background: lighten($dark-green, 5) !important;
     color: $light-green !important;
 }
 .form-control {
