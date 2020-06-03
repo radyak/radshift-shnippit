@@ -1,5 +1,5 @@
 <div class="btn-row">
-    <button class="btn btn-outline-primary btn-floating">
+    <button class="btn btn-outline-primary btn-floating" (click)="openOptions(content)">
         <fa-icon [icon]="optionsIcon"></fa-icon>
     </button>
 
@@ -8,5 +8,30 @@
     </button>
 </div>
 
-<textarea [ngModel]="shnippit?.text" (ngModelChange)="onChangeText($event)" placeholder="Enter your text ...">
+<textarea [ngModel]="shnippit?.text" (ngModelChange)="onChangeText($event)" placeholder="Enter your text ..." spellcheck="false">
 </textarea>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Shnippit options</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="dateOfBirth">Date of birth</label>
+                <div class="input-group">
+                    <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary" (click)="modal.close()">Close</button>
+    </div>
+</ng-template>

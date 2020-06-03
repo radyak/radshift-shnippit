@@ -1,9 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
+
+$light-green: #b1ffc5;
+$dark-green: #0f4962;
+
+$theme-colors: (
+    "primary": $light-green,
+    "secondary": $dark-green
+);
+
 @import '~bootstrap/scss/bootstrap';
+
+@font-face {
+    font-family: Mono;
+    src: url(assets/fonts/RobotoMono-Regular.ttf) format("truetype");
+}
 
 html, body {
     height: 100%;
     line-height: normal !important;
+}
+
+body, textarea, .modal-content, input, .form-control {
+    background: $dark-green !important;
+    color: $light-green !important;
+}
+.form-control {
+    border-color: $light-green;
+    border-width: 2px;
+}
+.btn-primary {
+    color: $dark-green;
+}
+.btn {
+    border-width: 2px;
+}
+
+
+// Modals
+
+.close {
+    text-shadow: none !important;
+    color: #b1ffc5;
+    font-size: 2rem;
+    outline: none;
+    border: 0;
+
+    &:hover {
+        color: #fff;
+    }
+
+    &:focus{
+        outline: none;
+    }
+}
+
+.modal-header {
+    border-bottom: none !important;
+}
+
+.modal-footer {
+    border-top: none !important;
 }

@@ -1,0 +1,19 @@
+.wrapper {
+    height: 100vh;
+    display: flex;
+
+    /* Direction of the items, can be row or column */
+    flex-direction: column;
+}
+
+header {
+    font-size: 2rem;
+    padding: 0.5rem;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: -0.077em;
+}
+
+main {
+    flex: 1;
+}

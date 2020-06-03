@@ -3,6 +3,7 @@ import {faCog, faSave} from "@fortawesome/free-solid-svg-icons";
 import {BackendService} from "../../services/backend.service";
 import {Router} from "@angular/router";
 import {Shnippit} from "../../model/Shnippit.model";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
     selector: 'shnippit-board',
@@ -17,7 +18,9 @@ export class ShnippitBoardComponent implements OnInit {
     @Input()
     shnippit: Shnippit;
 
-    constructor(private backendService: BackendService, private router: Router) {
+    constructor(private backendService: BackendService,
+                private router: Router,
+                private modalService: NgbModal) {
     }
 
     ngOnInit(): void {
@@ -46,6 +49,10 @@ export class ShnippitBoardComponent implements OnInit {
         this.backendService.updateShnippit(this.shnippit).subscribe(updatedShnippit => {
             this.shnippit = updatedShnippit;
         })
+    }
+
+    openOptions(content) {
+        this.modalService.open(content, { centered: true });
     }
 
 }
