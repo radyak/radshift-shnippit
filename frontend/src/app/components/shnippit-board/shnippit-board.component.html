@@ -56,6 +56,9 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-primary" (click)="modal.close()">Close</button>
+        <button type="button" class="btn btn-outline-primary" (click)="modal.close(editable)">
+            <fa-icon [icon]="editable ? saveIcon : closeIcon"></fa-icon>
+            {{ editable ? 'Save' : 'Close' }}
+        </button>
     </div>
 </ng-template>

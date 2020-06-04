@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {faCog, faSave, faEdit} from "@fortawesome/free-solid-svg-icons";
+import {faCog, faSave, faEdit, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {BackendService} from "../../services/backend.service";
 import {Router} from "@angular/router";
 import {Shnippit} from "../../model/Shnippit.model";
@@ -13,6 +13,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 export class ShnippitBoardComponent implements OnInit {
 
     saveIcon = faSave;
+    closeIcon = faTimes;
     optionsIcon = faCog;
     editIcon = faEdit;
 
@@ -61,7 +62,14 @@ export class ShnippitBoardComponent implements OnInit {
     }
 
     openOptions(content) {
-        this.modalService.open(content, { centered: true });
+        this.modalService.open(content, { centered: true }).result.then((closeResult) => {
+            // Close
+            if (closeResult && this.shnippit.publicId) {
+                this.update();
+            }
+        }, (dismissReasons) => {
+            // Nothing to do on dismiss
+        });
     }
 
     toggleEdit() {
