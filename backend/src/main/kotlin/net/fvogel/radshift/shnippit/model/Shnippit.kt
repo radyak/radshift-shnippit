@@ -15,6 +15,9 @@ data class Shnippit(
 
     @Lob
     @Column(name = "text", columnDefinition = "text", nullable = true)
-    var text: String? = null
+    var text: String? = null,
+
+    @Column(name = "type", columnDefinition = "char(16)", nullable = false)
+    var type: Type = Type.RAW
 
 )

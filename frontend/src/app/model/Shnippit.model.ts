@@ -1,4 +1,5 @@
 export interface Shnippit {
     publicId?: string,
-    text: string
+    text: string,
+    type: string
 }

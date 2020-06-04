@@ -31,8 +31,12 @@ export class ShnippitBoardComponent implements OnInit {
     }
 
     @Input()
-    onChangeText(value) {
-        this.shnippit.text = value;
+    setText(text: string) {
+        this.shnippit.text = text;
+    }
+
+    setType(type: string) {
+        this.shnippit.type = type;
     }
 
     save() {

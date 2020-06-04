@@ -40,7 +40,16 @@ textarea {
 .btn {
     border-width: 2px;
 }
+.dropdown-menu, .dropdown-item {
+    background: $dark-green;
+    color: $light-green;
+}
 
+.dropdown-item:hover,
+.dropdown-item.selected{
+    background: $light-green;
+    color: $dark-green;
+}
 
 // Modals
 

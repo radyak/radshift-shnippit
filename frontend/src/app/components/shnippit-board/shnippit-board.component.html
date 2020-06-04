@@ -13,7 +13,7 @@
 
 <textarea *ngIf="editable"
           [ngModel]="shnippit?.text"
-          (ngModelChange)="onChangeText($event)"
+          (ngModelChange)="setText($event)"
           placeholder="Enter your text ..."
           spellcheck="false">
 </textarea>
@@ -30,14 +30,29 @@
     <div class="modal-body">
         <form>
             <div class="form-group">
-                <label for="dateOfBirth">Date of birth</label>
+                <label>Type</label>
                 <div class="input-group">
-                    <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+                    <div ngbDropdown class="d-inline-block">
+                        <button class="btn btn-outline-primary" id="shnippitType" ngbDropdownToggle [disabled]="!editable">{{ shnippit?.type }}</button>
+                        <div ngbDropdownMenu aria-labelledby="shnippitType">
+                            <button ngbDropdownItem [class.selected]="shnippit?.type == 'RAW'" (click)="setType('RAW')">Raw</button>
+                            <button ngbDropdownItem [class.selected]="shnippit?.type == 'HTML'" (click)="setType('HTML')">HTML</button>
+                            <button ngbDropdownItem [class.selected]="shnippit?.type == 'JSON'" (click)="setType('JSON')">JSON</button>
+                            <button ngbDropdownItem [class.selected]="shnippit?.type == 'XML'" (click)="setType('XML')">XML</button>
+                            <button ngbDropdownItem [class.selected]="shnippit?.type == 'MARKDOWN'" (click)="setType('MARKDOWN')">Markdown</button>
+                        </div>
                     </div>
                 </div>
             </div>
+<!--            <div class="form-group">-->
+<!--                <label for="dateOfBirth">Date of birth</label>-->
+<!--                <div class="input-group">-->
+<!--                    <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">-->
+<!--                    <div class="input-group-append">-->
+<!--                        <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
         </form>
     </div>
     <div class="modal-footer">

@@ -15,7 +15,8 @@ export class NewShnippitComponent implements OnInit {
 
     ngOnInit(): void {
         this.shnippit = {
-            text: ''
+            text: '',
+            type: 'RAW'
         };
     }
 }

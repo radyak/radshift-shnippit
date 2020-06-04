@@ -23,7 +23,8 @@ export class BackendService {
     public updateShnippit(shnippit: Shnippit): Observable<Shnippit> {
         return this.httpClient.put<Shnippit>(`api/v1/shnippits/${shnippit.publicId}`, {
             publicId: shnippit.publicId,
-            text: shnippit.text
+            text: shnippit.text,
+            type: shnippit.type
         });
     }
 }

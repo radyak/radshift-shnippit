@@ -35,6 +35,7 @@ class ShnippitController(val shnippitRepository: ShnippitRepository,
     fun updateShnippit(@PathVariable publicId: String, @RequestBody updatedShnippit: Shnippit): Shnippit {
         val shnippit = shnippitRepository.findByPublicId(publicId) ?: throw NotFoundException();
         shnippit.text = updatedShnippit.text;
+        shnippit.type = updatedShnippit.type;
         return shnippitRepository.save(shnippit);
     }
 
