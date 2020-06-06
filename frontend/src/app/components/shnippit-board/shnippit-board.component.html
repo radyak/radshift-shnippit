@@ -2,8 +2,11 @@
     <button class="btn btn-outline-primary btn-floating" (click)="openOptions(content)">
         <fa-icon [icon]="optionsIcon"></fa-icon>
     </button>
+    <button *ngIf="editable" class="btn btn-outline-primary btn-floating" (click)="cancel()">
+        <fa-icon [icon]="cancelIcon"></fa-icon>
+    </button>
 
-    <button *ngIf="editable" class="btn btn-primary btn-floating big" (click)="save()">
+    <button *ngIf="editable" class="btn btn-primary btn-floating big" (click)="save()" [disabled]="!hasChanged">
         <fa-icon [icon]="saveIcon"></fa-icon>
     </button>
     <button *ngIf="!editable" class="btn btn-primary btn-floating big" (click)="toggleEdit()">

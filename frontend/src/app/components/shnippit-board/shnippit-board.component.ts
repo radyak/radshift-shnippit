@@ -14,8 +14,11 @@ export class ShnippitBoardComponent implements OnInit {
 
     saveIcon = faSave;
     closeIcon = faTimes;
+    cancelIcon = faTimes;
     optionsIcon = faCog;
     editIcon = faEdit;
+
+    hasChanged: boolean = false;
 
     @Input()
     shnippit: Shnippit;
@@ -34,10 +37,18 @@ export class ShnippitBoardComponent implements OnInit {
     @Input()
     setText(text: string) {
         this.shnippit.text = text;
+        this.hasChanged = true;
     }
 
     setType(type: string) {
         this.shnippit.type = type;
+        this.hasChanged = true;
+    }
+
+    setShnippit(shnippit: Shnippit) {
+        this.editable = false;
+        this.hasChanged = false;
+        this.shnippit = shnippit;
     }
 
     save() {
@@ -49,10 +60,7 @@ export class ShnippitBoardComponent implements OnInit {
     }
 
     cancel() {
-        this.backendService.getShnippit(this.shnippit.publicId).subscribe(shnippit => {
-            this.editable = false;
-            this.shnippit = shnippit;
-        })
+        this.backendService.getShnippit(this.shnippit.publicId).subscribe(shnippit => this.setShnippit(shnippit))
     }
 
     private create() {
@@ -62,9 +70,8 @@ export class ShnippitBoardComponent implements OnInit {
     }
 
     private update() {
-        this.backendService.updateShnippit(this.shnippit).subscribe(updatedShnippit => {
-            this.editable = false;
-            this.shnippit = updatedShnippit;
+        this.backendService.updateShnippit(this.shnippit).subscribe(shnippit => this.setShnippit(shnippit), (error) => {
+            console.log(error);
         })
     }
 
