@@ -11,17 +11,17 @@ export class BackendService {
   constructor(private httpClient: HttpClient) { }
 
     public createShnippit(shnippit: Shnippit): Observable<Shnippit> {
-        return this.httpClient.post<Shnippit>(`api/v1/shnippits`, {
+        return this.httpClient.post<Shnippit>(`/api/v1/shnippits`, {
             text: shnippit.text
         });
     }
 
     public getShnippit(publicId: string): Observable<Shnippit> {
-        return this.httpClient.get<Shnippit>(`api/v1/shnippits/${publicId}`);
+        return this.httpClient.get<Shnippit>(`/api/v1/shnippits/${publicId}`);
     }
 
     public updateShnippit(shnippit: Shnippit): Observable<Shnippit> {
-        return this.httpClient.put<Shnippit>(`api/v1/shnippits/${shnippit.publicId}`, {
+        return this.httpClient.put<Shnippit>(`/api/v1/shnippits/${shnippit.publicId}`, {
             publicId: shnippit.publicId,
             text: shnippit.text,
             type: shnippit.type

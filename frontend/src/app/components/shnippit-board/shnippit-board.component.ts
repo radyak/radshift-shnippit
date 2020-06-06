@@ -192,5 +192,5 @@ export class ShnippitBoardComponent implements OnInit {
 
 class Error {
     message: string;
-    additionalMessage: string
+    additionalMessage: string = 'Unkown Error'
 }
