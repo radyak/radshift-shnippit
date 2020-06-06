@@ -27,8 +27,8 @@ body, .modal-content, input, .form-control {
     color: $light-green !important;
 }
 textarea {
-    background: lighten($dark-green, 5) !important;
-    color: $light-green !important;
+    background: $light-green;
+    color: $dark-green;
 }
 .form-control {
     border-color: $light-green;
@@ -37,9 +37,29 @@ textarea {
 .btn-primary {
     color: $dark-green;
 }
+
+.btn.btn-primary {
+    &.btn-inverse {
+        @include button-variant($dark-green, $dark-green);
+        color: $light-green !important;
+        &:hover {
+            @include button-variant(darken($dark-green, 5), darken($dark-green, 5));
+        }
+    }
+}
+
 .btn {
     border-width: 2px;
+    &.btn-inverse {
+        @include button-variant($light-green, $dark-green);
+        color: $dark-green !important;
+        &:hover {
+            @include button-variant($dark-green, $dark-green);
+            color: $light-green !important;
+        }
+    }
 }
+
 .dropdown-menu, .dropdown-item {
     background: $dark-green;
     color: $light-green;

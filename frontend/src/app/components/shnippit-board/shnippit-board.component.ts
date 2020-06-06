@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {
     faClipboard,
     faCog,
@@ -33,6 +33,13 @@ export class ShnippitBoardComponent implements OnInit {
 
     error: Error;
 
+    private _textArea: ElementRef;
+    @ViewChild("textArea", { static: false }) set textArea(textArea: ElementRef) {
+        if(textArea) {
+            this._textArea = textArea;
+        }
+    }
+
     @Input()
     shnippit: Shnippit;
 
@@ -62,6 +69,15 @@ export class ShnippitBoardComponent implements OnInit {
         this.editable = false;
         this.hasChanged = false;
         this.shnippit = shnippit;
+    }
+
+    toggleEdit() {
+        this.editable = !this.editable;
+        if (this.editable) {
+            setTimeout(()=>{ // this will make the execution after the above boolean has changed
+                this._textArea.nativeElement.focus();
+            },0);
+        }
     }
 
     save() {
@@ -118,10 +134,6 @@ export class ShnippitBoardComponent implements OnInit {
         }, (dismissReasons) => {
             // Nothing to do on dismiss
         });
-    }
-
-    toggleEdit() {
-        this.editable = !this.editable;
     }
 
     handleKeyDown(event) {

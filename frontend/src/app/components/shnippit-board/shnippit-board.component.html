@@ -7,33 +7,35 @@
         </div>
     </div>
 
-    <button *ngIf="!editable" class="btn btn-outline-primary btn-floating">
+    <button *ngIf="!editable" class="btn btn-outline-primary btn-floating" [ngClass]="{'btn-inverse': editable}">
         <fa-icon [icon]="shareIcon"></fa-icon>
     </button>
-    <button *ngIf="!editable" class="btn btn-outline-primary btn-floating">
+    <button *ngIf="!editable" class="btn btn-outline-primary btn-floating" [ngClass]="{'btn-inverse': editable}">
         <fa-icon [icon]="copyToClipBoardIcon"></fa-icon>
     </button>
-    <button class="btn btn-outline-primary btn-floating" (click)="openOptions(content)">
+    <button class="btn btn-outline-primary btn-floating" (click)="openOptions(content)" [ngClass]="{'btn-inverse': editable}">
         <fa-icon [icon]="optionsIcon"></fa-icon>
     </button>
-    <button *ngIf="editable" class="btn btn-outline-primary btn-floating" (click)="cancel()">
+    <button *ngIf="editable" class="btn btn-outline-primary btn-floating" (click)="cancel()" [ngClass]="{'btn-inverse': editable}">
         <fa-icon [icon]="cancelIcon"></fa-icon>
     </button>
 
-    <button *ngIf="editable" class="btn btn-primary btn-floating big" (click)="save()" [disabled]="!hasChanged">
+    <button *ngIf="editable" class="btn btn-primary btn-floating big" (click)="save()" [disabled]="!hasChanged" [ngClass]="{'btn-inverse': editable}">
         <fa-icon [icon]="saveIcon"></fa-icon>
     </button>
-    <button *ngIf="!editable" class="btn btn-primary btn-floating big" (click)="toggleEdit()">
+    <button *ngIf="!editable" class="btn btn-primary btn-floating big" (click)="toggleEdit()" [ngClass]="{'btn-inverse': editable}">
         <fa-icon [icon]="editIcon"></fa-icon>
     </button>
 </div>
 
-<textarea *ngIf="editable"
+<textarea #textArea
+          *ngIf="editable"
           [ngModel]="shnippit?.text"
           (ngModelChange)="setText($event)"
           placeholder="Enter your text ..."
           spellcheck="false"
-          (keydown)="handleKeyDown($event)">
+          (keydown)="handleKeyDown($event)"
+          autofocus>
 </textarea>
 
 <div class="shnippit-readonly" *ngIf="!editable" markdown [data]="shnippit?.text" ></div>
