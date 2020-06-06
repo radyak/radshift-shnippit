@@ -10,12 +10,21 @@ textarea,
     white-space: pre;
 }
 
-.btn-row {
+.ctrl-row {
     position: fixed;
     bottom: 0;
     width: 100%;
     padding: 20px;
     text-align: right;
+
+    .messages > *{
+        padding-bottom: 1rem;
+        letter-spacing: -0.06em;
+
+        &.error {
+            color: #f77;
+        }
+    }
 }
 
 .btn-floating {
