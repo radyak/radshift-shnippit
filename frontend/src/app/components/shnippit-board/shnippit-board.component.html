@@ -7,6 +7,12 @@
         </div>
     </div>
 
+    <button *ngIf="!editable" class="btn btn-outline-primary btn-floating">
+        <fa-icon [icon]="shareIcon"></fa-icon>
+    </button>
+    <button *ngIf="!editable" class="btn btn-outline-primary btn-floating">
+        <fa-icon [icon]="copyToClipBoardIcon"></fa-icon>
+    </button>
     <button class="btn btn-outline-primary btn-floating" (click)="openOptions(content)">
         <fa-icon [icon]="optionsIcon"></fa-icon>
     </button>
@@ -34,7 +40,7 @@
 
 <ng-template #content let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Shnippit options</h4>
+        <h4 class="modal-title">Properties</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
             <span aria-hidden="true">&times;</span>
         </button>

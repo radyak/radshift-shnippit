@@ -1,5 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {faCog, faSave, faEdit, faTimes, faExclamationTriangle} from "@fortawesome/free-solid-svg-icons";
+import {
+    faClipboard,
+    faCog,
+    faEdit,
+    faExclamationTriangle,
+    faSave,
+    faShareAlt,
+    faTimes
+} from "@fortawesome/free-solid-svg-icons";
 import {BackendService} from "../../services/backend.service";
 import {Router} from "@angular/router";
 import {Shnippit} from "../../model/Shnippit.model";
@@ -18,6 +26,8 @@ export class ShnippitBoardComponent implements OnInit {
     optionsIcon = faCog;
     editIcon = faEdit;
     errorIcon = faExclamationTriangle;
+    shareIcon = faShareAlt;
+    copyToClipBoardIcon = faClipboard;
 
     hasChanged: boolean = false;
 
@@ -62,15 +72,6 @@ export class ShnippitBoardComponent implements OnInit {
         }
     }
 
-    cancel() {
-        this.backendService.getShnippit(this.shnippit.publicId).subscribe(shnippit => this.setShnippit(shnippit), (error) => {
-            this.error = {
-                message: 'Could not fetch Shnippit',
-                additionalMessage: `${error.statusText} (${error.status})`
-            }
-        })
-    }
-
     private create() {
         this.backendService.createShnippit(this.shnippit).subscribe(shnippit => {
             this.router.navigate([shnippit.publicId]);
@@ -86,6 +87,23 @@ export class ShnippitBoardComponent implements OnInit {
         this.backendService.updateShnippit(this.shnippit).subscribe(shnippit => this.setShnippit(shnippit), (error) => {
             this.error = {
                 message: 'Could not update Shnippit',
+                additionalMessage: `${error.statusText} (${error.status})`
+            }
+        })
+    }
+
+    cancel() {
+        if (this.shnippit.publicId) {
+            this.reload();
+        } else {
+            this.shnippit.text = '';
+        }
+    }
+
+    private reload() {
+        this.backendService.getShnippit(this.shnippit.publicId).subscribe(shnippit => this.setShnippit(shnippit), (error) => {
+            this.error = {
+                message: 'Could not fetch Shnippit',
                 additionalMessage: `${error.statusText} (${error.status})`
             }
         })

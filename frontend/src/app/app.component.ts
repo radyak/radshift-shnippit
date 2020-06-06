@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +6,4 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    title = 'shnippit';
-    faCoffee = faCoffee;
 }
