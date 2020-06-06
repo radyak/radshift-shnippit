@@ -1,16 +1,20 @@
 <div class="ctrl-row">
     <div class="messages">
-        <div *ngIf="error" class="error">
+        <div *ngIf="error" class="error-message">
             <fa-icon [icon]="errorIcon"></fa-icon>
             {{ error.message }}:
             <b *ngIf="error.additionalMessage">{{ error.additionalMessage }}</b>
+        </div>
+        <div *ngIf="successMessage" class="success-message">
+            <fa-icon [icon]="successIcon"></fa-icon>
+            {{ successMessage }}
         </div>
     </div>
 
     <button *ngIf="!editable" class="btn btn-outline-primary btn-floating" [ngClass]="{'btn-inverse': editable}">
         <fa-icon [icon]="shareIcon"></fa-icon>
     </button>
-    <button *ngIf="!editable" class="btn btn-outline-primary btn-floating" [ngClass]="{'btn-inverse': editable}">
+    <button *ngIf="!editable" class="btn btn-outline-primary btn-floating" (click)="copyToClipBoard()" [ngClass]="{'btn-inverse': editable}">
         <fa-icon [icon]="copyToClipBoardIcon"></fa-icon>
     </button>
     <button class="btn btn-outline-primary btn-floating" (click)="openOptions(content)" [ngClass]="{'btn-inverse': editable}">

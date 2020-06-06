@@ -30,6 +30,14 @@ textarea {
     background: $light-green;
     color: $dark-green;
 }
+
+.error-message {
+    color: #f77;
+}
+.success-message {
+    color: $light-green;
+}
+
 .form-control {
     border-color: $light-green;
     border-width: 2px;

@@ -6,7 +6,8 @@ import {
     faExclamationTriangle,
     faSave,
     faShareAlt,
-    faTimes
+    faTimes,
+    faCheck
 } from "@fortawesome/free-solid-svg-icons";
 import {BackendService} from "../../services/backend.service";
 import {Router} from "@angular/router";
@@ -26,12 +27,14 @@ export class ShnippitBoardComponent implements OnInit {
     optionsIcon = faCog;
     editIcon = faEdit;
     errorIcon = faExclamationTriangle;
+    successIcon = faCheck;
     shareIcon = faShareAlt;
     copyToClipBoardIcon = faClipboard;
 
     hasChanged: boolean = false;
 
     error: Error;
+    successMessage: string
 
     private _textArea: ElementRef;
     @ViewChild("textArea", { static: false }) set textArea(textArea: ElementRef) {
@@ -134,6 +137,24 @@ export class ShnippitBoardComponent implements OnInit {
         }, (dismissReasons) => {
             // Nothing to do on dismiss
         });
+    }
+
+    copyToClipBoard(){
+        const selBox = document.createElement('textarea');
+        selBox.style.position = 'fixed';
+        selBox.style.left = '0';
+        selBox.style.top = '0';
+        selBox.style.opacity = '0';
+        selBox.value = this.shnippit.text;
+        document.body.appendChild(selBox);
+        selBox.focus();
+        selBox.select();
+        document.execCommand('copy');
+        document.body.removeChild(selBox);
+        this.successMessage = 'Copied to clipboard';
+        setTimeout( () => {
+            this.successMessage = '';
+        }, 3000);
     }
 
     handleKeyDown(event) {
