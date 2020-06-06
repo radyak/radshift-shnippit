@@ -48,6 +48,13 @@ export class ShnippitBoardComponent implements OnInit {
         }
     }
 
+    cancel() {
+        this.backendService.getShnippit(this.shnippit.publicId).subscribe(shnippit => {
+            this.editable = false;
+            this.shnippit = shnippit;
+        })
+    }
+
     private create() {
         this.backendService.createShnippit(this.shnippit).subscribe(shnippit => {
             this.router.navigate([shnippit.publicId]);
@@ -74,6 +81,58 @@ export class ShnippitBoardComponent implements OnInit {
 
     toggleEdit() {
         this.editable = !this.editable;
+    }
+
+    handleKeyDown(event) {
+        this.handleTab(event)
+        this.handleCtrlS(event)
+        this.handleEscape(event)
+    }
+
+    private handleCtrlS(event) {
+        if(navigator.platform.match('Mac')){
+            this.handleMacKeyEvents(event);
+        }
+        else {
+            this.handleWindowsKeyEvents(event);
+        }
+    }
+
+    private handleTab(event) {
+        if (event.keyCode === 9 || event.which === 9) {
+            event.preventDefault();
+            var start = event.target.selectionStart;
+            var end = event.target.selectionEnd;
+            this.shnippit.text = this.shnippit.text.substring(0, start) + '\t' + this.shnippit.text.substring(end);
+            event.target.selectionStart = event.target.selectionEnd = start + 1;
+        }
+
+    }
+
+    private handleMacKeyEvents(event) {
+        // MetaKey documentation
+        // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/metaKey
+        let charCode = String.fromCharCode(event.which).toLowerCase();
+        if (event.metaKey && charCode === 's') {
+            // Action on Cmd + S
+            event.preventDefault();
+            this.save();
+        }
+    }
+
+    private handleEscape(event) {
+        if (event.which === 27 || event.keyCode === 27) {
+            this.cancel();
+        }
+    }
+
+    private handleWindowsKeyEvents(event) {
+        let charCode = String.fromCharCode(event.which).toLowerCase();
+        if (event.ctrlKey && charCode === 's') {
+            // Action on Ctrl + S
+            event.preventDefault();
+            this.save();
+        }
     }
 
 }

@@ -15,10 +15,11 @@
           [ngModel]="shnippit?.text"
           (ngModelChange)="setText($event)"
           placeholder="Enter your text ..."
-          spellcheck="false">
+          spellcheck="false"
+          (keydown)="handleKeyDown($event)">
 </textarea>
 
-<div class="shnippit-readonly" *ngIf="!editable">{{ shnippit?.text }}</div>
+<div class="shnippit-readonly" *ngIf="!editable" markdown [data]="shnippit?.text" ></div>
 
 <ng-template #content let-modal>
     <div class="modal-header">

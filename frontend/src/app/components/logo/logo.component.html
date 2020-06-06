@@ -1,0 +1,17 @@
+<svg viewBox="-10 -10 120 120" [attr.width]="size" [attr.height]="size">
+
+    <g fill="none"
+        [attr.stroke]="color"
+        stroke-width="7"
+        stroke-linecap="round"
+        stroke-linejoin="round">
+
+        <path d="M0,0 L0,100 L65,100 L100,65 L100,0 L0,0"
+              fill-opacity="0"/>
+
+        <path d="M65,100 L100,65 L65,65 L65,100"
+              fill-opacity="100"
+                [attr.fill]="color"/>
+
+    </g>
+</svg>
