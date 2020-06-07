@@ -8,15 +8,9 @@ import {Shnippit} from "../../model/Shnippit.model";
 })
 export class NewShnippitComponent implements OnInit {
 
-    shnippit: Shnippit;
-
     constructor() {
     }
 
     ngOnInit(): void {
-        this.shnippit = {
-            text: '',
-            type: 'RAW'
-        };
     }
 }

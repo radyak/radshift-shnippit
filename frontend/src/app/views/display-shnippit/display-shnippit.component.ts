@@ -1,9 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap} from "@angular/router";
-import {Shnippit} from "../../model/Shnippit.model";
-import {Observable, pipe} from "rxjs";
-import {BackendService} from "../../services/backend.service";
-import {switchMap} from "rxjs/operators";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-display-shnippit',
@@ -12,18 +8,15 @@ import {switchMap} from "rxjs/operators";
 })
 export class DisplayShnippitComponent implements OnInit {
 
-    shnippit$: Observable<Shnippit>;
+    shnippitId: string;
 
-    constructor(private route: ActivatedRoute, private backendService: BackendService) {
+    constructor(private route: ActivatedRoute) {
     }
 
     ngOnInit(): void {
-        this.shnippit$ = this.route.paramMap.pipe(
-            switchMap(params => {
-                let publicId = params.get('publicId');
-                return this.backendService.getShnippit(publicId);
-            })
-        );
+        this.route.paramMap.subscribe(params => {
+            this.shnippitId = params.get('publicId')
+        })
     }
 
 }

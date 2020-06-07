@@ -1,13 +1,13 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {
+    faCheck,
     faClipboard,
     faCog,
     faEdit,
     faExclamationTriangle,
     faSave,
     faShareAlt,
-    faTimes,
-    faCheck
+    faTimes
 } from "@fortawesome/free-solid-svg-icons";
 import {BackendService} from "../../services/backend.service";
 import {Router} from "@angular/router";
@@ -43,21 +43,27 @@ export class ShnippitBoardComponent implements OnInit {
         }
     }
 
-    @Input()
-    shnippit: Shnippit;
-
-    @Input()
-    editable: boolean = false;
+    shnippit: Shnippit = {
+        text: '',
+        type: 'RAW'
+    };
 
     constructor(private backendService: BackendService,
                 private router: Router,
                 private modalService: NgbModal) {
     }
 
+    @Input()
+    editable: boolean = false;
+
+    @Input()
+    set shnippitId(shnippitId: string) {
+        this.load(shnippitId);
+    }
+
     ngOnInit(): void {
     }
 
-    @Input()
     setText(text: string) {
         this.shnippit.text = text;
         this.hasChanged = true;
@@ -113,14 +119,15 @@ export class ShnippitBoardComponent implements OnInit {
 
     cancel() {
         if (this.shnippit.publicId) {
-            this.reload();
+            this.load(this.shnippit.publicId);
         } else {
             this.shnippit.text = '';
         }
     }
 
-    private reload() {
-        this.backendService.getShnippit(this.shnippit.publicId).subscribe(shnippit => this.setShnippit(shnippit), (error) => {
+    private load(publicId: string) {
+        this.backendService.getShnippit(publicId).subscribe(shnippit => this.setShnippit(shnippit), (error) => {
+            console.log('Err', error)
             this.error = {
                 message: 'Could not fetch Shnippit',
                 additionalMessage: `${error.statusText} (${error.status})`
