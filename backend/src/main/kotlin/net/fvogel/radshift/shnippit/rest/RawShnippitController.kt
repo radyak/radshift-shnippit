@@ -15,9 +15,10 @@ import javax.transaction.Transactional
 
 @Transactional
 @RestController
+@RequestMapping("/raw")
 class RawShnippitController(val shnippitRepository: ShnippitRepository) {
 
-    @GetMapping("/raw/{publicId}")
+    @GetMapping("{publicId}")
     fun getRawContentByPublicId(@PathVariable publicId: String,
                                 response: HttpServletResponse): ResponseEntity<String> {
         val shnippit = shnippitRepository.findByPublicId(publicId) ?: throw NotFoundException();

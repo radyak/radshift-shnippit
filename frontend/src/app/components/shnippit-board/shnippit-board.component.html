@@ -69,12 +69,17 @@
                 </div>
             </div>
 <!--            <div class="form-group">-->
-<!--                <label for="dateOfBirth">Date of birth</label>-->
+<!--                <label for="validUntil">Valid until</label>-->
 <!--                <div class="input-group">-->
-<!--                    <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">-->
-<!--                    <div class="input-group-append">-->
-<!--                        <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>-->
-<!--                    </div>-->
+<!--                    <input id="validUntil"-->
+<!--                           [disabled]="!editable"-->
+<!--                           [(ngModel)]="validUntil"-->
+<!--                           class="form-control"-->
+<!--                           (focus)="dp.toggle()"-->
+<!--                           placeholder="yyyy-mm-dd"-->
+<!--                           name="dp"-->
+<!--                           ngbDatepicker-->
+<!--                           #dp="ngbDatepicker">-->
 <!--                </div>-->
 <!--            </div>-->
         </form>
