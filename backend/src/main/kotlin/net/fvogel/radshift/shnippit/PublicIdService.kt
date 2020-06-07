@@ -6,10 +6,10 @@ import java.util.concurrent.ThreadLocalRandom
 import kotlin.streams.asSequence
 
 @Service
-open class PublicIdService(val shnippitRepository: ShnippitRepository) {
+class PublicIdService(val shnippitRepository: ShnippitRepository) {
 
     private val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
-    private val defaultLength : Int = 16
+    private val defaultLength : Int = 6
 
     fun createPublicId(length: Int = defaultLength): String {
         var publicId = "";
