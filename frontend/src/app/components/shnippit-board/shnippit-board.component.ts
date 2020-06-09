@@ -67,6 +67,11 @@ export class ShnippitBoardComponent implements OnInit {
         this.load(shnippitId);
     }
 
+    @Input()
+    set initialText(text: string) {
+        this.shnippit.text = text;
+    }
+
     ngOnInit(): void {
     }
 

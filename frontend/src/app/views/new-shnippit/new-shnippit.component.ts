@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Shnippit} from "../../model/Shnippit.model";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-new-shnippit',
@@ -8,9 +8,24 @@ import {Shnippit} from "../../model/Shnippit.model";
 })
 export class NewShnippitComponent implements OnInit {
 
-    constructor() {
+    initialText: string;
+
+    constructor(private route: ActivatedRoute) {
     }
 
     ngOnInit(): void {
+        this.route.queryParams.subscribe(params => {
+            this.initialText = [
+                    params['title'],
+                    params['text'],
+                    params['url'],
+                    params['name'],
+                    params['description'],
+                    params['link']
+                ]
+                .filter(element => !!element)
+                .join('\n');
+        });
+
     }
 }

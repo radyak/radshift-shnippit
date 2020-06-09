@@ -55,5 +55,19 @@
       "type": "image/png",
       "purpose": "maskable any"
     }
-  ]
+  ],
+  "share_target": {
+    "url_template": "/?title={title}&text={text}&url={url}&name={name}&description={description}&link={link}",
+    "action": "/",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "name": "name",
+      "description": "description",
+      "link": "link"
+    }
+  }
 }
