@@ -7,7 +7,9 @@ import {
     faExclamationTriangle,
     faSave,
     faShareAlt,
-    faTimes
+    faTimes,
+    faPlus,
+    faEllipsisH
 } from "@fortawesome/free-solid-svg-icons";
 import {BackendService} from "../../services/backend.service";
 import {Router} from "@angular/router";
@@ -30,11 +32,15 @@ export class ShnippitBoardComponent implements OnInit {
     successIcon = faCheck;
     shareIcon = faShareAlt;
     copyToClipBoardIcon = faClipboard;
+    newIcon = faPlus;
+    moreIcon = faEllipsisH;
 
     hasChanged: boolean = false;
 
     error: Error;
-    successMessage: string
+    successMessage: string;
+
+    displayMoreOptions: boolean = false;
 
     private _textArea: ElementRef;
     @ViewChild("textArea", { static: false }) set textArea(textArea: ElementRef) {
@@ -89,6 +95,10 @@ export class ShnippitBoardComponent implements OnInit {
         }
     }
 
+    toggleDisplayMoreOptions() {
+        this.displayMoreOptions = !this.displayMoreOptions;
+    }
+
     save() {
         if (this.shnippit.publicId) {
             this.update();
@@ -123,6 +133,11 @@ export class ShnippitBoardComponent implements OnInit {
         } else {
             this.shnippit.text = '';
         }
+        this.error = null;
+    }
+
+    new() {
+        this.router.navigate(["/"]);
     }
 
     private load(publicId: string) {

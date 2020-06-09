@@ -11,25 +11,38 @@
         </div>
     </div>
 
-    <button *ngIf="!editable" class="btn btn-outline-primary btn-floating" [ngClass]="{'btn-inverse': editable}">
-        <fa-icon [icon]="shareIcon"></fa-icon>
-    </button>
-    <button *ngIf="!editable" class="btn btn-outline-primary btn-floating" (click)="copyToClipBoard()" [ngClass]="{'btn-inverse': editable}">
-        <fa-icon [icon]="copyToClipBoardIcon"></fa-icon>
-    </button>
-    <button class="btn btn-outline-primary btn-floating" (click)="openOptions(content)" [ngClass]="{'btn-inverse': editable}">
-        <fa-icon [icon]="optionsIcon"></fa-icon>
-    </button>
-    <button *ngIf="editable" class="btn btn-outline-primary btn-floating" (click)="cancel()" [ngClass]="{'btn-inverse': editable}">
-        <fa-icon [icon]="cancelIcon"></fa-icon>
-    </button>
+    <div class="btn-row-vertical" [ngClass]="{'out': displayMoreOptions}">
+        <button *ngIf="!editable" class="btn btn-outline-primary btn-floating" [ngClass]="{'btn-inverse': editable}">
+            <fa-icon [icon]="shareIcon"></fa-icon>
+        </button>
+        <button *ngIf="!editable" class="btn btn-outline-primary btn-floating" (click)="copyToClipBoard()" [ngClass]="{'btn-inverse': editable}">
+            <fa-icon [icon]="copyToClipBoardIcon"></fa-icon>
+        </button>
+        <button class="btn btn-outline-primary btn-floating" (click)="openOptions(content)" [ngClass]="{'btn-inverse': editable}">
+            <fa-icon [icon]="optionsIcon"></fa-icon>
+        </button>
+    </div>
 
-    <button *ngIf="editable" class="btn btn-primary btn-floating big" (click)="save()" [disabled]="!hasChanged" [ngClass]="{'btn-inverse': editable}">
-        <fa-icon [icon]="saveIcon"></fa-icon>
-    </button>
-    <button *ngIf="!editable" class="btn btn-primary btn-floating big" (click)="toggleEdit()" [ngClass]="{'btn-inverse': editable}">
-        <fa-icon [icon]="editIcon"></fa-icon>
-    </button>
+    <div class="btn-row">
+        <button class="name btn btn-outline-primary btn-floating" (click)="toggleDisplayMoreOptions()" [ngClass]="{'btn-inverse': editable || displayMoreOptions}">
+            {{ shnippit?.publicId }}
+            <fa-icon *ngIf="!shnippit?.publicId" [icon]="moreIcon"></fa-icon>
+        </button>
+
+        <button *ngIf="editable" class="push btn btn-outline-primary btn-floating" (click)="cancel()" [ngClass]="{'btn-inverse': editable}">
+            <fa-icon [icon]="cancelIcon"></fa-icon>
+        </button>
+        <button *ngIf="!editable" class="push btn btn-outline-primary btn-floating" (click)="new()" [ngClass]="{'btn-inverse': editable}">
+            <fa-icon [icon]="newIcon"></fa-icon>
+        </button>
+
+        <button *ngIf="editable" class="btn btn-primary btn-floating big" (click)="save()" [disabled]="!hasChanged" [ngClass]="{'btn-inverse': editable}">
+            <fa-icon [icon]="saveIcon"></fa-icon>
+        </button>
+        <button *ngIf="!editable" class="btn btn-primary btn-floating big" (click)="toggleEdit()" [ngClass]="{'btn-inverse': editable}">
+            <fa-icon [icon]="editIcon"></fa-icon>
+        </button>
+    </div>
 </div>
 
 <textarea #textArea
