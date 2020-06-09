@@ -42,6 +42,11 @@ textarea {
     }
 }
 
+// Couldn't get this to work in shnippit-board.component.scss
+.shnippit-readonly a {
+    text-decoration: underline !important;
+}
+
 .form-control {
     border-color: $light-green;
     border-width: 2px;
