@@ -5,17 +5,17 @@
             {{ error.message }}:
             <b *ngIf="error.additionalMessage">{{ error.additionalMessage }}</b>
         </div>
-        <div *ngIf="successMessage" class="success-message">
+        <div *ngIf="successMessage" class="success-message" [ngClass]="{'inverse': editable}">
             <fa-icon [icon]="successIcon"></fa-icon>
             {{ successMessage }}
         </div>
     </div>
 
     <div class="btn-row-vertical" [ngClass]="{'out': displayMoreOptions}">
-        <button *ngIf="!editable" class="btn btn-outline-primary btn-floating" [ngClass]="{'btn-inverse': editable}">
+        <button *ngIf="!editable && canShare()" class="btn btn-outline-primary btn-floating" (click)="share()" [ngClass]="{'btn-inverse': editable}">
             <fa-icon [icon]="shareIcon"></fa-icon>
         </button>
-        <button *ngIf="!editable" class="btn btn-outline-primary btn-floating" (click)="copyToClipBoard()" [ngClass]="{'btn-inverse': editable}">
+        <button class="btn btn-outline-primary btn-floating" (click)="copyToClipBoard()" [ngClass]="{'btn-inverse': editable}">
             <fa-icon [icon]="copyToClipBoardIcon"></fa-icon>
         </button>
         <button class="btn btn-outline-primary btn-floating" (click)="openOptions(content)" [ngClass]="{'btn-inverse': editable}">

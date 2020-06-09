@@ -17,10 +17,10 @@ export class NewShnippitComponent implements OnInit {
         this.route.queryParams.subscribe(params => {
             this.initialText = [
                     params['title'],
-                    params['text'],
-                    params['url'],
                     params['name'],
                     params['description'],
+                    params['text'],
+                    params['url'],
                     params['link']
                 ]
                 .filter(element => !!element)

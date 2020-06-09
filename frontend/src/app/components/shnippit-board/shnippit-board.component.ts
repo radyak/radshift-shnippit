@@ -69,7 +69,10 @@ export class ShnippitBoardComponent implements OnInit {
 
     @Input()
     set initialText(text: string) {
-        this.shnippit.text = text;
+        if (text) {
+            this.shnippit.text = text;
+            this.hasChanged = true;
+        }
     }
 
     ngOnInit(): void {
@@ -167,6 +170,18 @@ export class ShnippitBoardComponent implements OnInit {
     }
 
     copyToClipBoard(){
+        if (!this.editable) {
+            this.copyFromDisplay();
+        } else {
+            this.copyFromTextarea();
+        }
+        this.successMessage = 'Copied to clipboard';
+        setTimeout( () => {
+            this.successMessage = '';
+        }, 3000);
+    }
+
+    private copyFromDisplay() {
         const selBox = document.createElement('textarea');
         selBox.style.position = 'fixed';
         selBox.style.left = '0';
@@ -178,10 +193,14 @@ export class ShnippitBoardComponent implements OnInit {
         selBox.select();
         document.execCommand('copy');
         document.body.removeChild(selBox);
-        this.successMessage = 'Copied to clipboard';
-        setTimeout( () => {
-            this.successMessage = '';
-        }, 3000);
+    }
+
+    private copyFromTextarea() {
+        const selBox = this._textArea.nativeElement;
+        selBox.focus();
+        selBox.select();
+        document.execCommand('copy');
+        selBox.blur();
     }
 
     handleKeyDown(event) {
@@ -234,6 +253,24 @@ export class ShnippitBoardComponent implements OnInit {
             event.preventDefault();
             this.save();
         }
+    }
+
+    canShare(): boolean {
+        return !!navigator['share']
+    }
+
+    share(): void {
+        if (!this.canShare()) {
+            this.error = {
+                message: 'This client cannot share content',
+                additionalMessage: `(Share API not supported)`
+            };
+            return;
+        }
+        navigator['share']({
+            url: location.href,
+            // title: document.title
+        })
     }
 
 }
