@@ -28,8 +28,3 @@ run.dev.frontend:
 run: build
 	docker run -p 8080:8080 -v ./test-data:/data -e ENV=dev $(REPO)/$(IMAGE):latest
 	docker run -p 8080:8080 -e ENV=dev radyak/shnippit:latest
-
-
-## common
-
-deploy.all: deploy.arm32 deploy
