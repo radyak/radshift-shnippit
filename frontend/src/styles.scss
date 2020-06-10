@@ -90,21 +90,10 @@ textarea {
 
 // Modals
 
-.close {
-    text-shadow: none !important;
-    color: #b1ffc5;
-    font-size: 2rem;
-    outline: none;
-    border: 0;
-
-    &:hover {
-        color: #fff;
-    }
-
-    &:focus{
-        outline: none;
-    }
+.modal-content * {
+    letter-spacing: -0.06rem !important;
 }
+
 
 .modal-header {
     border-bottom: none !important;

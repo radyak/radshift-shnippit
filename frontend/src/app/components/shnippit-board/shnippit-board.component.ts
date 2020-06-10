@@ -1,15 +1,16 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {
     faCheck,
     faClipboard,
-    faCog,
+    faCode,
     faEdit,
     faExclamationTriangle,
     faSave,
     faShareAlt,
     faTimes,
     faPlus,
-    faEllipsisH
+    faEllipsisH,
+    faPaperclip
 } from "@fortawesome/free-solid-svg-icons";
 import {BackendService} from "../../services/backend.service";
 import {Router} from "@angular/router";
@@ -26,7 +27,7 @@ export class ShnippitBoardComponent implements OnInit {
     saveIcon = faSave;
     closeIcon = faTimes;
     cancelIcon = faTimes;
-    optionsIcon = faCog;
+    typeIcon = faCode;
     editIcon = faEdit;
     errorIcon = faExclamationTriangle;
     successIcon = faCheck;
@@ -34,6 +35,7 @@ export class ShnippitBoardComponent implements OnInit {
     copyToClipBoardIcon = faClipboard;
     newIcon = faPlus;
     moreIcon = faEllipsisH;
+    attachmentsIcon = faPaperclip;
 
     hasChanged: boolean = false;
 
@@ -158,10 +160,10 @@ export class ShnippitBoardComponent implements OnInit {
         })
     }
 
-    openOptions(content) {
-        this.modalService.open(content, { centered: true }).result.then((closeResult) => {
+    openDialog(templateRef: TemplateRef<any>) {
+        this.modalService.open(templateRef, { centered: true }).result.then((updateRequired) => {
             // Close
-            if (closeResult && this.shnippit.publicId) {
+            if (updateRequired && this.shnippit.publicId) {
                 this.update();
             }
         }, (dismissReasons) => {
@@ -271,6 +273,10 @@ export class ShnippitBoardComponent implements OnInit {
             url: location.href,
             // title: document.title
         })
+    }
+
+    openAttachmentsDialog(): void {
+
     }
 
 }

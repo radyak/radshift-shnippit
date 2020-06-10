@@ -15,11 +15,14 @@
         <button *ngIf="!editable && canShare()" class="btn btn-outline-primary btn-floating" (click)="share()" [ngClass]="{'btn-inverse': editable}">
             <fa-icon [icon]="shareIcon"></fa-icon>
         </button>
+        <button class="btn btn-outline-primary btn-floating" (click)="openAttachmentsDialog()" [ngClass]="{'btn-inverse': editable}">
+            <fa-icon [icon]="attachmentsIcon"></fa-icon>
+        </button>
         <button class="btn btn-outline-primary btn-floating" (click)="copyToClipBoard()" [ngClass]="{'btn-inverse': editable}">
             <fa-icon [icon]="copyToClipBoardIcon"></fa-icon>
         </button>
-        <button class="btn btn-outline-primary btn-floating" (click)="openOptions(content)" [ngClass]="{'btn-inverse': editable}">
-            <fa-icon [icon]="optionsIcon"></fa-icon>
+        <button class="btn btn-outline-primary btn-floating" (click)="openDialog(content)" [ngClass]="{'btn-inverse': editable}">
+            <fa-icon [icon]="typeIcon"></fa-icon>
         </button>
     </div>
 
@@ -59,18 +62,17 @@
 
 <ng-template #content let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Properties</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
-            <span aria-hidden="true">&times;</span>
-        </button>
+        <h4 class="modal-title">
+            <fa-icon [icon]="typeIcon"></fa-icon>
+            Type
+        </h4>
     </div>
     <div class="modal-body">
         <form>
             <div class="form-group">
-                <label>Type</label>
                 <div class="input-group">
                     <div ngbDropdown class="d-inline-block">
-                        <button class="btn btn-outline-primary" id="shnippitType" ngbDropdownToggle [disabled]="!editable">{{ shnippit?.type }}</button>
+                        <button class="btn btn-outline-primary select" id="shnippitType" ngbDropdownToggle [disabled]="!editable">{{ shnippit?.type }}</button>
                         <div ngbDropdownMenu aria-labelledby="shnippitType">
                             <button ngbDropdownItem [class.selected]="shnippit?.type == 'RAW'" (click)="setType('RAW')">Raw</button>
                             <button ngbDropdownItem [class.selected]="shnippit?.type == 'HTML'" (click)="setType('HTML')">HTML</button>
@@ -98,9 +100,13 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-primary" (click)="modal.close(editable)">
-            <fa-icon [icon]="editable ? saveIcon : closeIcon"></fa-icon>
-            {{ editable ? 'Save' : 'Close' }}
+        <button *ngIf="editable && shnippit.publicId" type="button" class="btn btn-outline-primary" (click)="modal.close(editable)">
+            <fa-icon [icon]="saveIcon"></fa-icon>
+            Save
+        </button>
+        <button type="button" class="btn btn-outline-primary" (click)="modal.close(false)">
+            <fa-icon [icon]="closeIcon"></fa-icon>
+            Close
         </button>
     </div>
 </ng-template>

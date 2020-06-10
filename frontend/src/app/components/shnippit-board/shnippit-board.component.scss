@@ -76,6 +76,16 @@ textarea,
         margin-top: -9px;
         margin-right: 0;
     }
+}
 
+.dropdown,
+.select,
+.dropdown-menu.show{
+    width: 100%;
+    text-align: left;
+}
 
+.dropdown-toggle::after {
+    float: right;
+    margin: 10px;
 }
