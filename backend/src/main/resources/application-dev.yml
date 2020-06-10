@@ -8,3 +8,7 @@ spring:
 
   # dev only
   jpa.hibernate.ddl-auto: create
+
+application:
+  attachments:
+    storagePath: ${java.io.tmpdir}

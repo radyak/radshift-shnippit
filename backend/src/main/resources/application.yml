@@ -2,3 +2,12 @@ spring:
   datasource:
     url: jdbc:h2:/data/database;DB_CLOSE_ON_EXIT=FALSE
 
+  servlet:
+    multipart:
+      max-file-size: 64MB
+      max-request-size: 64MB
+      enabled: true
+
+application:
+  attachments:
+    storagePath: ${ATTACHMENTS_STORAGE_PATH}

@@ -1,4 +1,4 @@
-package net.fvogel.radshift.shnippit
+package net.fvogel.radshift.shnippit.service
 
 import net.fvogel.radshift.shnippit.persistence.ShnippitRepository
 import org.springframework.stereotype.Service
