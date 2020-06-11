@@ -14,6 +14,7 @@ import {ShnippitBoardComponent} from './components/shnippit-board/shnippit-board
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {LogoComponent} from "./components/logo/logo.component";
+import {AngularFileUploaderModule} from "angular-file-uploader";
 
 @NgModule({
     declarations: [
@@ -31,7 +32,8 @@ import {LogoComponent} from "./components/logo/logo.component";
         FormsModule,
         FontAwesomeModule,
         ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-        MarkdownModule.forRoot()
+        MarkdownModule.forRoot(),
+        AngularFileUploaderModule
     ],
     providers: [],
     bootstrap: [AppComponent]

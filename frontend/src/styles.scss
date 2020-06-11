@@ -102,3 +102,48 @@ textarea {
 .modal-footer {
     border-top: none !important;
 }
+
+
+.afu-dragndrop-text {
+    color: $light-green !important;
+}
+.afu-dragndrop-box {
+    border-color: $light-green !important;
+}
+angular-file-uploader,
+.afu-dragndrop-box {
+    width: 100% !important;
+    margin: 10px 0 -10px
+}
+.afu-select-btn,
+.afu-reset-btn,
+.afu-upload-btn {
+    color: $light-green !important;
+    border: 2px solid $light-green !important;
+    background: $dark-green !important;
+    font-size: 1rem !important;
+    padding: 0.375rem 0.75rem !important;
+
+    &:hover:not([disabled]) {
+        color: $dark-green !important;
+        background: $light-green !important;
+    }
+}
+.afu-constraints-info {
+    display: none;
+}
+.afu-valid-file,
+.afu-invalid-file {
+    margin: 0;
+}
+.afu-upload-status {
+    display: none;
+}
+.afu-progress-bar {
+    border: 2px solid $light-green;
+    background: $dark-green;
+
+    & .progress-bar {
+        color: $dark-green;
+    }
+}

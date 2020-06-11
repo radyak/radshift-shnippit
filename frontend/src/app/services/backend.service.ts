@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Shnippit} from "../model/Shnippit.model";
+import {Attachment} from "../model/Attachment.model";
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,13 @@ export class BackendService {
             text: shnippit.text,
             type: shnippit.type
         });
+    }
+
+    public getShnippitAttachments(publicId: string): Observable<Attachment[]> {
+        return this.httpClient.get<Attachment[]>(`/api/v1/shnippits/${publicId}/attachments`);
+    }
+
+    public deleteAttachment(publicId: string, attachmentName: string): Observable<void> {
+        return this.httpClient.delete<void>(`/api/v1/shnippits/${publicId}/attachments/${attachmentName}`);
     }
 }

@@ -48,7 +48,7 @@ class ShnippitController(val shnippitRepository: ShnippitRepository,
     }
 
     @PostMapping("/{publicId}/attachments")
-    fun saveAttachments(@RequestParam("attachments") attachmentFiles: Array<MultipartFile>, @PathVariable publicId: String) {
+    fun saveAttachments(@RequestParam("file") attachmentFiles: Array<MultipartFile>, @PathVariable publicId: String) {
         attachmentService.storeAttachments(attachmentFiles, publicId)
     }
 

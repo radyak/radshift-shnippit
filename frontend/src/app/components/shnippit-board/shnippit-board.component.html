@@ -15,13 +15,13 @@
         <button *ngIf="!editable && canShare()" class="btn btn-outline-primary btn-floating" (click)="share()" [ngClass]="{'btn-inverse': editable}">
             <fa-icon [icon]="shareIcon"></fa-icon>
         </button>
-        <button class="btn btn-outline-primary btn-floating" (click)="openAttachmentsDialog()" [ngClass]="{'btn-inverse': editable}">
+        <button class="btn btn-outline-primary btn-floating" (click)="openDialog(attachmentsDialog)" [ngClass]="{'btn-inverse': editable}">
             <fa-icon [icon]="attachmentsIcon"></fa-icon>
         </button>
         <button class="btn btn-outline-primary btn-floating" (click)="copyToClipBoard()" [ngClass]="{'btn-inverse': editable}">
             <fa-icon [icon]="copyToClipBoardIcon"></fa-icon>
         </button>
-        <button class="btn btn-outline-primary btn-floating" (click)="openDialog(content)" [ngClass]="{'btn-inverse': editable}">
+        <button class="btn btn-outline-primary btn-floating" (click)="openDialog(typeDialog)" [ngClass]="{'btn-inverse': editable}">
             <fa-icon [icon]="typeIcon"></fa-icon>
         </button>
     </div>
@@ -60,7 +60,7 @@
 
 <div class="shnippit-readonly" *ngIf="!editable" markdown [data]="shnippit?.text" ></div>
 
-<ng-template #content let-modal>
+<ng-template #typeDialog let-modal>
     <div class="modal-header">
         <h4 class="modal-title">
             <fa-icon [icon]="typeIcon"></fa-icon>
@@ -83,20 +83,20 @@
                     </div>
                 </div>
             </div>
-<!--            <div class="form-group">-->
-<!--                <label for="validUntil">Valid until</label>-->
-<!--                <div class="input-group">-->
-<!--                    <input id="validUntil"-->
-<!--                           [disabled]="!editable"-->
-<!--                           [(ngModel)]="validUntil"-->
-<!--                           class="form-control"-->
-<!--                           (focus)="dp.toggle()"-->
-<!--                           placeholder="yyyy-mm-dd"-->
-<!--                           name="dp"-->
-<!--                           ngbDatepicker-->
-<!--                           #dp="ngbDatepicker">-->
-<!--                </div>-->
-<!--            </div>-->
+            <!--            <div class="form-group">-->
+            <!--                <label for="validUntil">Valid until</label>-->
+            <!--                <div class="input-group">-->
+            <!--                    <input id="validUntil"-->
+            <!--                           [disabled]="!editable"-->
+            <!--                           [(ngModel)]="validUntil"-->
+            <!--                           class="form-control"-->
+            <!--                           (focus)="dp.toggle()"-->
+            <!--                           placeholder="yyyy-mm-dd"-->
+            <!--                           name="dp"-->
+            <!--                           ngbDatepicker-->
+            <!--                           #dp="ngbDatepicker">-->
+            <!--                </div>-->
+            <!--            </div>-->
         </form>
     </div>
     <div class="modal-footer">
@@ -107,6 +107,47 @@
         <button type="button" class="btn btn-outline-primary" (click)="modal.close(false)">
             <fa-icon [icon]="closeIcon"></fa-icon>
             Close
+        </button>
+    </div>
+</ng-template>
+
+
+<ng-template #attachmentsDialog let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">
+            <fa-icon [icon]="attachmentsIcon"></fa-icon>
+            Attachments
+        </h4>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="attachments && attachments.length">
+            <div *ngFor="let attachment of attachments" class="attachment">
+                <button class="btn btn-outline-primary" (click)="deleteAttachment(shnippit, attachment)">
+                    <fa-icon [icon]="deleteIcon"></fa-icon>
+                </button>
+                <a [href]="attachmentLink(shnippit, attachment)">
+                    {{ attachment.name }}
+                </a>
+                ({{ attachment.size }} byte)
+            </div>
+        </div>
+        <div *ngIf="!(attachments && attachments.length)" class="attachment">
+            No attachments found
+        </div>
+        <form>
+            <div class="form-group">
+                <div class="input-group">
+                    <angular-file-uploader
+                        [config]="fileUploaderConfig()"
+                        (ApiResponse)="loadAttachments(shnippit?.publicId)">
+                    </angular-file-uploader>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary" (click)="modal.close(false)">
+            OK
         </button>
     </div>
 </ng-template>

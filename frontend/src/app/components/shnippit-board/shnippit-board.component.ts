@@ -10,12 +10,14 @@ import {
     faTimes,
     faPlus,
     faEllipsisH,
-    faPaperclip
+    faPaperclip,
+    faTrashAlt
 } from "@fortawesome/free-solid-svg-icons";
 import {BackendService} from "../../services/backend.service";
 import {Router} from "@angular/router";
 import {Shnippit} from "../../model/Shnippit.model";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {Attachment} from "../../model/Attachment.model";
 
 @Component({
     selector: 'shnippit-board',
@@ -36,6 +38,7 @@ export class ShnippitBoardComponent implements OnInit {
     newIcon = faPlus;
     moreIcon = faEllipsisH;
     attachmentsIcon = faPaperclip;
+    deleteIcon = faTrashAlt;
 
     hasChanged: boolean = false;
 
@@ -54,6 +57,32 @@ export class ShnippitBoardComponent implements OnInit {
     shnippit: Shnippit = {
         text: '',
         type: 'RAW'
+    };
+    attachments: Attachment[] = [];
+
+    fileUploaderConfig() {
+        return {
+            multiple: true,
+            fileNameIndex: false,
+            uploadAPI:  {
+                url: `/api/v1/shnippits/${this.shnippit?.publicId}/attachments`,
+                method:"POST",
+            },
+            theme: "dragNDrop",
+            hideProgressBar: false,
+            hideResetBtn: true,
+            hideSelectBtn: false,
+            replaceTexts: {
+                selectFileBtn: 'Select Files',
+                resetBtn: 'Reset',
+                uploadBtn: 'Upload',
+                dragNDropBox: 'Drag N Drop',
+                attachPinBtn: 'Attach Files...',
+                afterUploadMsg_success: 'Successfully Uploaded !',
+                afterUploadMsg_error: 'Upload Failed !',
+                sizeLimit: 'Size Limit'
+            }
+        }
     };
 
     constructor(private backendService: BackendService,
@@ -152,11 +181,17 @@ export class ShnippitBoardComponent implements OnInit {
 
     private load(publicId: string) {
         this.backendService.getShnippit(publicId).subscribe(shnippit => this.setShnippit(shnippit), (error) => {
-            console.log('Err', error)
             this.error = {
                 message: 'Could not fetch Shnippit',
                 additionalMessage: `${error.statusText} (${error.status})`
             }
+        });
+        this.loadAttachments(publicId);
+    }
+
+    loadAttachments(publicId: string) {
+        this.backendService.getShnippitAttachments(publicId).subscribe(attachments => this.attachments = attachments, (error) => {
+            console.info('Could not load attachments', error)
         })
     }
 
@@ -275,8 +310,14 @@ export class ShnippitBoardComponent implements OnInit {
         })
     }
 
-    openAttachmentsDialog(): void {
+    attachmentLink(shnippit: Shnippit, attachment: Attachment) {
+        return `/api/v1/shnippits/${shnippit.publicId}/attachments/${attachment.name}`
+    }
 
+    deleteAttachment(shnippit: Shnippit, attachment: Attachment) {
+        this.backendService.deleteAttachment(shnippit.publicId, attachment.name).subscribe(() => {
+            this.load(shnippit.publicId)
+        })
     }
 
 }
