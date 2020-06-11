@@ -28,6 +28,7 @@
     "@ng-bootstrap/ng-bootstrap": "^6.1.0",
     "angular-file-uploader": "^6.2.7",
     "bootstrap": "^4.4.0",
+    "ngx-filesize": "^2.0.15",
     "ngx-markdown": "^9.1.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",

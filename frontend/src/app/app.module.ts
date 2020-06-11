@@ -15,6 +15,7 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {LogoComponent} from "./components/logo/logo.component";
 import {AngularFileUploaderModule} from "angular-file-uploader";
+import {NgxFilesizeModule} from "ngx-filesize";
 
 @NgModule({
     declarations: [
@@ -33,7 +34,8 @@ import {AngularFileUploaderModule} from "angular-file-uploader";
         FontAwesomeModule,
         ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
         MarkdownModule.forRoot(),
-        AngularFileUploaderModule
+        AngularFileUploaderModule,
+        NgxFilesizeModule
     ],
     providers: [],
     bootstrap: [AppComponent]

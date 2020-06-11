@@ -121,15 +121,23 @@
     </div>
     <div class="modal-body">
         <div *ngIf="attachments && attachments.length">
-            <div *ngFor="let attachment of attachments" class="attachment">
-                <button class="btn btn-outline-primary" (click)="deleteAttachment(shnippit, attachment)">
-                    <fa-icon [icon]="deleteIcon"></fa-icon>
-                </button>
-                <a [href]="attachmentLink(shnippit, attachment)">
-                    {{ attachment.name }}
-                </a>
-                ({{ attachment.size }} byte)
-            </div>
+            <table class="attachments">
+                <tr *ngFor="let attachment of attachments">
+                    <td>
+                        <a [href]="attachmentLink(shnippit, attachment)">
+                            {{ attachment.name }}
+                        </a>
+                    </td>
+                    <td>
+                        <b>({{ attachment.size | filesize }})</b>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-primary" (click)="deleteAttachment(shnippit, attachment)">
+                            <fa-icon [icon]="deleteIcon"></fa-icon>
+                        </button>
+                    </td>
+                </tr>
+            </table>
         </div>
         <div *ngIf="!(attachments && attachments.length)" class="attachment">
             No attachments found
