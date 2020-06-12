@@ -92,4 +92,8 @@ textarea,
 
 .attachments {
     width: 100%;
+
+    & .filename {
+        word-wrap: anywhere;
+    }
 }

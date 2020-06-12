@@ -135,6 +135,10 @@ angular-file-uploader,
 .afu-valid-file,
 .afu-invalid-file {
     margin: 0;
+
+    &.row {
+        flex-wrap: initial !important;
+    }
 }
 .afu-upload-status {
     display: none;
@@ -142,6 +146,7 @@ angular-file-uploader,
 .afu-progress-bar {
     border: 2px solid $light-green;
     background: $dark-green;
+    flex: auto;
 
     & .progress-bar {
         color: $dark-green;

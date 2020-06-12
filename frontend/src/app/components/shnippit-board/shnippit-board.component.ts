@@ -138,6 +138,10 @@ export class ShnippitBoardComponent implements OnInit {
         this.displayMoreOptions = !this.displayMoreOptions;
     }
 
+    closeDisplayMoreOptions() {
+        this.displayMoreOptions = false;
+    }
+
     save() {
         if (this.shnippit.publicId) {
             this.update();

@@ -27,7 +27,7 @@
     </div>
 
     <div class="btn-row">
-        <button class="name btn btn-outline-primary btn-floating" (click)="toggleDisplayMoreOptions()" [ngClass]="{'btn-inverse': editable || displayMoreOptions}">
+        <button class="name btn btn-outline-primary btn-floating" (blur)="closeDisplayMoreOptions()" (click)="toggleDisplayMoreOptions()" [ngClass]="{'btn-inverse': editable || displayMoreOptions}">
             {{ shnippit?.publicId }}
             <fa-icon *ngIf="!shnippit?.publicId" [icon]="moreIcon"></fa-icon>
         </button>
@@ -123,7 +123,7 @@
         <div *ngIf="attachments && attachments.length">
             <table class="attachments">
                 <tr *ngFor="let attachment of attachments">
-                    <td>
+                    <td class="filename">
                         <a [href]="attachmentLink(shnippit, attachment)">
                             {{ attachment.name }}
                         </a>
