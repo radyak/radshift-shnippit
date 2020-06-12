@@ -15,7 +15,7 @@
         <button *ngIf="!editable && canShare()" class="btn btn-outline-primary btn-floating" (click)="share()" [ngClass]="{'btn-inverse': editable}">
             <fa-icon [icon]="shareIcon"></fa-icon>
         </button>
-        <button class="btn btn-outline-primary btn-floating" (click)="openDialog(attachmentsDialog)" [ngClass]="{'btn-inverse': editable}">
+        <button *ngIf="shnippit?.publicId" class="btn btn-outline-primary btn-floating" (click)="openDialog(attachmentsDialog)" [ngClass]="{'btn-inverse': editable}">
             <fa-icon [icon]="attachmentsIcon"></fa-icon>
         </button>
         <button class="btn btn-outline-primary btn-floating" (click)="copyToClipBoard()" [ngClass]="{'btn-inverse': editable}">

@@ -16,6 +16,7 @@ import {environment} from '../environments/environment';
 import {LogoComponent} from "./components/logo/logo.component";
 import {AngularFileUploaderModule} from "angular-file-uploader";
 import {NgxFilesizeModule} from "ngx-filesize";
+import { OverviewComponent } from './views/overview/overview.component';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import {NgxFilesizeModule} from "ngx-filesize";
         NewShnippitComponent,
         DisplayShnippitComponent,
         ShnippitBoardComponent,
-        LogoComponent
+        LogoComponent,
+        OverviewComponent
     ],
     imports: [
         BrowserModule,

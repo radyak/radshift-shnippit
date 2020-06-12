@@ -4,6 +4,7 @@
 
 $light-green: #b1ffc5;
 $dark-green: #0f4962;
+$red: #f77;
 
 $theme-colors: (
     "primary": $light-green,
@@ -14,7 +15,7 @@ $theme-colors: (
 
 @font-face {
     font-family: Mono;
-    src: url(assets/fonts/RobotoMono-Regular.ttf) format("truetype");
+    src: url(src/assets/fonts/RobotoMono-Regular.ttf) format("truetype");
 }
 
 html, body {
@@ -32,7 +33,7 @@ textarea {
 }
 
 .error-message {
-    color: #f77;
+    color: $red;
 }
 .success-message {
     color: $light-green;

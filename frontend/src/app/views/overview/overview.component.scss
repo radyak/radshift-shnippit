@@ -1,0 +1,65 @@
+@import "../../../styles";
+
+.search {
+    margin: 40px 0;
+}
+
+::-webkit-input-placeholder {
+    letter-spacing: -0.06rem;
+}
+::-moz-placeholder {
+    letter-spacing: -0.06rem;
+}
+
+.input-group-text {
+    background: $light-green;
+    color: $dark-green;
+    cursor: pointer;
+
+    &:hover {
+        color: lighten($dark-green, 25);
+    }
+}
+.error {
+    color: $red;
+}
+
+a:hover {
+    text-decoration: none !important;
+}
+
+.container {
+    max-width: 700px;
+    margin-top: 20px;
+    letter-spacing: -0.06rem !important;
+}
+
+.row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    justify-content: space-between;
+}
+
+.shnippit {
+    margin-top: 20px;
+
+    .text {
+        font: 16px Mono;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        margin-bottom: 5px;
+    }
+
+    .type {
+        padding: 5px 10px;
+    }
+
+    .publicid {
+        font-weight: bold;
+        border: 2px solid;
+        border-radius: 24px;
+        width: unset !important;
+        padding: 5px 10px;
+    }
+}
