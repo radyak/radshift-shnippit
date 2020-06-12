@@ -4,7 +4,7 @@ REPO=radyak
 IMAGE=shnippit
 
 
-default: deploy
+default: release
 
 package:
 	mvn clean install -DskipTests
@@ -12,7 +12,7 @@ package:
 build: package
 	docker build -t $(REPO)/$(IMAGE):latest .
 
-deploy: build
+release: build
 	docker tag  $(REPO)/$(IMAGE):latest $(REPO)/$(IMAGE):latest
 	docker push $(REPO)/$(IMAGE):latest
 
