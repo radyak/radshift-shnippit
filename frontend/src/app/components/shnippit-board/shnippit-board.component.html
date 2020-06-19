@@ -15,9 +15,6 @@
         <button *ngIf="!editable && canShare()" class="btn btn-outline-primary btn-floating" (click)="share()" [ngClass]="{'btn-inverse': editable}">
             <fa-icon [icon]="shareIcon"></fa-icon>
         </button>
-        <button *ngIf="shnippit?.publicId" class="btn btn-outline-primary btn-floating" (click)="openDialog(attachmentsDialog)" [ngClass]="{'btn-inverse': editable}">
-            <fa-icon [icon]="attachmentsIcon"></fa-icon>
-        </button>
         <button class="btn btn-outline-primary btn-floating" (click)="copyToClipBoard()" [ngClass]="{'btn-inverse': editable}">
             <fa-icon [icon]="copyToClipBoardIcon"></fa-icon>
         </button>
@@ -30,6 +27,10 @@
         <button class="name btn btn-outline-primary btn-floating" (blur)="closeDisplayMoreOptions()" (click)="toggleDisplayMoreOptions()" [ngClass]="{'btn-inverse': editable || displayMoreOptions}">
             {{ shnippit?.publicId }}
             <fa-icon *ngIf="!shnippit?.publicId" [icon]="moreIcon"></fa-icon>
+        </button>
+
+        <button class="btn btn-outline-primary btn-floating" (click)="openDialog(attachmentsDialog)" [ngClass]="{'btn-inverse': editable, 'no-attachments': !hasAttachments()}">
+            <fa-icon [icon]="attachmentsIcon"></fa-icon>
         </button>
 
         <button *ngIf="editable" class="push btn btn-outline-primary btn-floating" (click)="cancel()" [ngClass]="{'btn-inverse': editable}">
@@ -147,7 +148,7 @@
                 <div class="input-group">
                     <angular-file-uploader
                         [config]="fileUploaderConfig()"
-                        (ApiResponse)="loadAttachments(shnippit?.publicId)">
+                        (ApiResponse)="onUploadSuccess($event)">
                     </angular-file-uploader>
                 </div>
             </div>

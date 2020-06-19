@@ -51,10 +51,6 @@ export class BackendService {
         );
     }
 
-    public getAllSchnippitsFromCache(): Observable<Shnippit[]> {
-        return this.localCacheService.getAllShnippits();
-    }
-
     public getShnippitAttachments(publicId: string): Observable<Attachment[]> {
         return this.httpClient.get<Attachment[]>(`/api/v1/shnippits/${publicId}/attachments`);
     }

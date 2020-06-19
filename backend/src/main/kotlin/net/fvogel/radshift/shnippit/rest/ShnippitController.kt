@@ -48,8 +48,10 @@ class ShnippitController(val shnippitRepository: ShnippitRepository,
     }
 
     @PostMapping("/{publicId}/attachments")
-    fun saveAttachments(@RequestParam("file") attachmentFiles: Array<MultipartFile>, @PathVariable publicId: String) {
-        attachmentService.storeAttachments(attachmentFiles, publicId)
+    fun saveAttachments(@RequestParam("file") attachmentFiles: Array<MultipartFile>, @PathVariable publicId: String): Shnippit {
+        val shnippit: Shnippit? = shnippitRepository.findByPublicId(publicId) ?: createShnippit(Shnippit(text = ""))
+        attachmentService.storeAttachments(attachmentFiles, shnippit!!.publicId!!)
+        return shnippit
     }
 
     @GetMapping("/{publicId}/attachments")

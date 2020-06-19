@@ -38,6 +38,13 @@ textarea,
         visibility: visible;
     }
 }
+
+@media only screen and (max-height: 200px) {
+    .ctrl-row {
+        display: none;
+    }
+}
+
 .ctrl-row {
     position: fixed;
     bottom: 0;
@@ -46,9 +53,13 @@ textarea,
 
     .btn-row {
         display: flex;
-    }
-    .push {
-        margin-left: auto;
+        justify-content: space-between;
+
+        @media only screen and (min-width: 400px) {
+            .push {
+                margin-left: auto;
+            }
+        }
     }
 
     .messages > *{

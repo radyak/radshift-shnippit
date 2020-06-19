@@ -6,6 +6,12 @@
     flex-direction: column;
 }
 
+@media only screen and (max-height: 200px) {
+    header {
+        display: none;
+    }
+}
+
 header {
     font-size: 1.8rem;
     padding: 0.5rem;

@@ -14,10 +14,11 @@ import {
     faTrashAlt
 } from "@fortawesome/free-solid-svg-icons";
 import {BackendService} from "../../services/backend.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Shnippit} from "../../model/Shnippit.model";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {Attachment} from "../../model/Attachment.model";
+import {Observable} from "rxjs";
 
 @Component({
     selector: 'shnippit-board',
@@ -59,6 +60,9 @@ export class ShnippitBoardComponent implements OnInit {
         type: 'RAW'
     };
     attachments: Attachment[] = [];
+    hasAttachments() {
+        return this.attachments && this.attachments.length;
+    }
 
     fileUploaderConfig() {
         return {
@@ -87,6 +91,7 @@ export class ShnippitBoardComponent implements OnInit {
 
     constructor(private backendService: BackendService,
                 private router: Router,
+                private route: ActivatedRoute,
                 private modalService: NgbModal) {
     }
 
@@ -191,6 +196,18 @@ export class ShnippitBoardComponent implements OnInit {
             }
         });
         this.loadAttachments(publicId);
+    }
+
+    onUploadSuccess(event) {
+        if (this.shnippit && this.shnippit.publicId) {
+            this.loadAttachments(this.shnippit.publicId)
+        } else {
+            this.modalService.dismissAll()
+            this.shnippit.publicId = event.body.publicId
+            this.backendService.updateShnippit(this.shnippit).subscribe(shnippit => {
+                this.router.navigate([shnippit.publicId])
+            })
+        }
     }
 
     loadAttachments(publicId: string) {

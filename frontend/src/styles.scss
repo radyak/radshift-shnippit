@@ -72,6 +72,14 @@ textarea {
     }
 }
 
+.btn-outline-primary {
+    background: $dark-green;
+}
+
+.no-attachments {
+    opacity: 0.4;
+}
+
 .dropdown-menu, .dropdown-item {
     background: $dark-green;
     color: $light-green;
