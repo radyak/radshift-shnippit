@@ -76,8 +76,14 @@ textarea {
     background: $dark-green;
 }
 
-.no-attachments {
-    opacity: 0.4;
+.has-attachments {
+    background: $light-green !important;
+    color: $dark-green !important;
+
+    &.btn-inverse {
+        background: $dark-green !important;
+        color: $light-green !important;
+    }
 }
 
 .dropdown-menu, .dropdown-item {

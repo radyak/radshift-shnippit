@@ -29,7 +29,7 @@
             <fa-icon *ngIf="!shnippit?.publicId" [icon]="moreIcon"></fa-icon>
         </button>
 
-        <button class="btn btn-outline-primary btn-floating" (click)="openDialog(attachmentsDialog)" [ngClass]="{'btn-inverse': editable, 'no-attachments': !hasAttachments()}">
+        <button class="btn btn-outline-primary btn-floating" (click)="openDialog(attachmentsDialog)" [ngClass]="{'btn-inverse': editable, 'has-attachments': hasAttachments()}">
             <fa-icon [icon]="attachmentsIcon"></fa-icon>
         </button>
 
