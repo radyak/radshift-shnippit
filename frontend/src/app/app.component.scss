@@ -1,3 +1,5 @@
+@import 'src/colors';
+
 .wrapper {
     height: 100vh;
     display: flex;
@@ -23,4 +25,14 @@ header {
 
 main {
     flex: 1;
+}
+
+footer {
+    height: 100px;
+}
+
+@media only screen and (max-height: 200px) {
+    footer {
+        display: none;
+    }
 }

@@ -40,10 +40,10 @@
             <fa-icon [icon]="newIcon"></fa-icon>
         </button>
 
-        <button *ngIf="editable" class="btn btn-primary btn-floating big" (click)="save()" [disabled]="!hasChanged" [ngClass]="{'btn-inverse': editable}">
+        <button *ngIf="editable" class="btn btn-outline-primary btn-floating big" (click)="save()" [disabled]="!hasChanged" [ngClass]="{'btn-inverse': editable}">
             <fa-icon [icon]="saveIcon"></fa-icon>
         </button>
-        <button *ngIf="!editable" class="btn btn-primary btn-floating big" (click)="toggleEdit()" [ngClass]="{'btn-inverse': editable}">
+        <button *ngIf="!editable" class="btn btn-outline-primary btn-floating big" (click)="toggleEdit()" [ngClass]="{'btn-inverse': !editable}">
             <fa-icon [icon]="editIcon"></fa-icon>
         </button>
     </div>
