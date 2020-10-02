@@ -41,10 +41,16 @@ class ShnippitController(val shnippitRepository: ShnippitRepository,
 
     @PutMapping("{publicId}")
     fun updateShnippit(@PathVariable publicId: String, @RequestBody updatedShnippit: Shnippit): Shnippit {
-        val shnippit = shnippitRepository.findByPublicId(publicId) ?: throw NotFoundException();
+        val shnippit = getByPublicId(publicId);
         shnippit.text = updatedShnippit.text;
         shnippit.type = updatedShnippit.type;
         return shnippitRepository.save(shnippit);
+    }
+
+    @DeleteMapping("{publicId}")
+    fun deleteByPublicId(@PathVariable publicId: String): Unit {
+        val shnippit = getByPublicId(publicId);
+        shnippitRepository.delete(shnippit)
     }
 
     @PostMapping("/{publicId}/attachments")

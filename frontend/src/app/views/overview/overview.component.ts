@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalCacheService} from "../../services/local-cache.service";
 import {Shnippit} from "../../model/Shnippit.model";
-import {faCode, faExclamationTriangle, faSearch} from "@fortawesome/free-solid-svg-icons";
+import {faCode, faExclamationTriangle, faSearch, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {BackendService} from "../../services/backend.service";
 import {Router} from "@angular/router";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {DeleteShnippitModalComponent} from "../../components/delete-shnippit-modal/delete-shnippit-modal.component";
 
 @Component({
     selector: 'app-overview',
@@ -17,12 +19,14 @@ export class OverviewComponent implements OnInit {
     error: string;
 
     typeIcon = faCode;
+    deleteIcon = faTrashAlt;
     searchIcon = faSearch;
     errorIcon = faExclamationTriangle;
 
     constructor(private localCacheService: LocalCacheService,
                 private backendService: BackendService,
-                private router: Router) {
+                private router: Router,
+                private modalService: NgbModal) {
     }
 
     ngOnInit(): void {
@@ -51,4 +55,21 @@ export class OverviewComponent implements OnInit {
         )
     }
 
+    deleteShnippitFromView(shnippit: Shnippit) {
+        let index = this.shnippits.indexOf(shnippit);
+        this.shnippits.splice(index, 1);
+    }
+
+    openModal(content, shnippit: Shnippit) {
+        const modalRef = this.modalService.open(DeleteShnippitModalComponent, {centered: true});
+        modalRef.componentInstance.shnippit = shnippit;
+
+        modalRef.result.then(() => {
+            this.deleteShnippitFromView(shnippit);
+        }, (reason => {
+
+        }));
+    }
+
 }
+

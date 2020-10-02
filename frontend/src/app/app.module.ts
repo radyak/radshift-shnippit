@@ -17,6 +17,7 @@ import {LogoComponent} from "./components/logo/logo.component";
 import {AngularFileUploaderModule} from "angular-file-uploader";
 import {NgxFilesizeModule} from "ngx-filesize";
 import { OverviewComponent } from './views/overview/overview.component';
+import { DeleteShnippitModalComponent } from './components/delete-shnippit-modal/delete-shnippit-modal.component';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,8 @@ import { OverviewComponent } from './views/overview/overview.component';
         DisplayShnippitComponent,
         ShnippitBoardComponent,
         LogoComponent,
-        OverviewComponent
+        OverviewComponent,
+        DeleteShnippitModalComponent
     ],
     imports: [
         BrowserModule,

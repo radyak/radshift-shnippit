@@ -58,4 +58,8 @@ export class BackendService {
     public deleteAttachment(publicId: string, attachmentName: string): Observable<void> {
         return this.httpClient.delete<void>(`/api/v1/shnippits/${publicId}/attachments/${attachmentName}`);
     }
+
+    public deleteShnippit(publicId: string): Observable<void> {
+        return this.httpClient.delete<void>(`/api/v1/shnippits/${publicId}`);
+    }
 }

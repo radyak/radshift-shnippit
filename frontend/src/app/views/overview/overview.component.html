@@ -25,13 +25,21 @@
     <div *ngFor="let shnippit of getFilteredShnippits()" class="shnippit">
         <a [routerLink]="'/' + shnippit.publicId">
             <div class="text">{{ shnippit.text }}</div>
-            <div class="row">
+        </a>
+        <div class="row">
+            <a [routerLink]="'/' + shnippit.publicId">
                 <div class="publicid">{{ shnippit.publicId }}</div>
-                <div class="type">
+            </a>
+            <div>
+                <span class="type">
                     <fa-icon [icon]="typeIcon"></fa-icon>
                     {{ shnippit.type }}
-                </div>
+                </span>
+
+                <button (click)="openModal(content, shnippit)" class="btn btn-outline-primary btn-floating">
+                    <fa-icon [icon]="deleteIcon"></fa-icon>
+                </button>
             </div>
-        </a>
+        </div>
     </div>
 </div>

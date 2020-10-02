@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Delete Shnippit</h4>
+</div>
+<div class="modal-body">
+    How you want to delete this Shnippit?
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-warning modal-button" (click)="deleteShnippitLocally()">
+        <fa-icon [icon]="deleteIcon"></fa-icon>
+        Delete locally
+    </button>
+    <button type="button" class="btn btn-outline-danger modal-button" (click)="deleteShnippitFromServer()">
+        <fa-icon [icon]="deleteIcon"></fa-icon>
+        Delete from server
+    </button>
+    <button type="button" class="btn btn-primary modal-button" (click)="activeModal.dismiss()">
+        <fa-icon [icon]="closeIcon"></fa-icon>
+        Cancel
+    </button>
+</div>
