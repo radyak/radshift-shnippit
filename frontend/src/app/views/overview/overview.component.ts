@@ -60,7 +60,7 @@ export class OverviewComponent implements OnInit {
         this.shnippits.splice(index, 1);
     }
 
-    openModal(content, shnippit: Shnippit) {
+    openModal(shnippit: Shnippit) {
         const modalRef = this.modalService.open(DeleteShnippitModalComponent, {centered: true});
         modalRef.componentInstance.shnippit = shnippit;
 
