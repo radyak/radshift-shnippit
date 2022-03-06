@@ -1,0 +1,5 @@
+# https://www.jetbrains.com/help/idea/exploring-http-syntax.html#compose-several-requests-in-a-file
+
+# Get all Shnippits
+GET http://localhost:8080/api/v1/shnippits
+Accept: application/json

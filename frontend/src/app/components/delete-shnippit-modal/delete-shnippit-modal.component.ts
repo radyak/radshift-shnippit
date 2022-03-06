@@ -34,7 +34,10 @@ export class DeleteShnippitModalComponent implements OnInit {
 
     deleteShnippitFromServer() {
         this.backendService.deleteShnippit(this.shnippit.publicId).subscribe(
-            () => this.activeModal.close(),
+            () => {
+                this.deleteShnippitLocally()
+                this.activeModal.close()
+            },
             () => {
                 console.error('Could not delete shnippit from server');
                 this.deleteShnippitLocally()
