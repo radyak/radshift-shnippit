@@ -1,7 +1,7 @@
 {
   "name": "Shnippit",
   "short_name": "Shnippit",
-  "theme_color": "#b1ffc5",
+  "theme_color": "#0f4962",
   "background_color": "#0f4962",
   "display": "standalone",
   "scope": "./",
