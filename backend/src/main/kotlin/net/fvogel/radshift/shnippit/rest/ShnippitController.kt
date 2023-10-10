@@ -3,9 +3,11 @@ package net.fvogel.radshift.shnippit.rest
 import net.fvogel.radshift.shnippit.model.Attachment
 import net.fvogel.radshift.shnippit.model.Shnippit
 import net.fvogel.radshift.shnippit.persistence.ShnippitRepository
+import net.fvogel.radshift.shnippit.rest.exceptions.NotAllowedException
 import net.fvogel.radshift.shnippit.rest.exceptions.NotFoundException
 import net.fvogel.radshift.shnippit.service.PublicIdService
 import net.fvogel.radshift.shnippit.service.AttachmentService
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.io.Resource
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -22,8 +24,22 @@ class ShnippitController(val shnippitRepository: ShnippitRepository,
                          val attachmentService: AttachmentService
 ) {
 
+    @Value("\${application.admin-token.value}")
+    private lateinit var adminToken: String
+
+    private var deniedAdminAccessAttempts: Int = 0
+    private val adminAccessAttempts: Int = 3
+
     @GetMapping
-    fun getAllShnippits(): List<Shnippit> {
+    fun getAllShnippits(@RequestHeader("\${application.admin-token.header-name}") adminTokenHeader: String): List<Shnippit> {
+        if (!this.adminToken.equals(adminTokenHeader) || this.deniedAdminAccessAttempts >= this.adminAccessAttempts) {
+            this.deniedAdminAccessAttempts++;
+            if (this.deniedAdminAccessAttempts >= 3) {
+                println("Admin access denied ${this.deniedAdminAccessAttempts} already. Access blocked; please restart application")
+            } else
+                println("Admin access denied; (${this.adminAccessAttempts - this.deniedAdminAccessAttempts}) attempts remaining")
+            throw NotAllowedException();
+        }
         return shnippitRepository.findAll();
     }
 

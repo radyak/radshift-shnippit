@@ -11,3 +11,6 @@ spring:
 application:
   attachments:
     storagePath: ${ATTACHMENTS_STORAGE_PATH}
+  admin-token:
+    header-name: X-Admin-Token
+    value: ${ADMIN_TOKEN}

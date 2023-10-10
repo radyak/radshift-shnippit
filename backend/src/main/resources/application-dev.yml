@@ -12,3 +12,5 @@ spring:
 application:
   attachments:
     storagePath: ${java.io.tmpdir}
+  admin-token:
+    value: abc123
