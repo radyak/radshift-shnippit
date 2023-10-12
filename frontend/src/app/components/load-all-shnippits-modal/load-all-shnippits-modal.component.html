@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Load all Shnippits</h4>
+</div>
+<div class="modal-body">
+    Please enter the password to load all Shnippits:
+
+    <input type="password"
+           name="password"
+           class="form-control"
+           [(ngModel)]="password"
+           placeholder="Password"
+    >
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-primary modal-button" (click)="activeModal.dismiss()">
+        <fa-icon [icon]="closeIcon"></fa-icon>
+        Cancel
+    </button>
+
+    <button type="button" class="btn btn-primary modal-button" (click)="activeModal.close(password)">
+        <fa-icon [icon]="submitIcon"></fa-icon>
+        Send
+    </button>
+</div>

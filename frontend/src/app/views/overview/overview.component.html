@@ -36,10 +36,17 @@
                     {{ shnippit.type }}
                 </span>
 
-                <button (click)="openModal(shnippit)" class="btn btn-outline-primary btn-floating">
+                <button (click)="openDeleteDialog(shnippit)" class="btn btn-outline-primary btn-floating">
                     <fa-icon [icon]="deleteIcon"></fa-icon>
                 </button>
             </div>
         </div>
+    </div>
+
+    <div class="admin-controls">
+        <button class="btn btn-outline-primary btn-floating full" (click)="openLoadAllDialog()">
+            <fa-icon [icon]="lockIcon"></fa-icon>
+            Load all
+        </button>
     </div>
 </div>

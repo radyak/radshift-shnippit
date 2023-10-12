@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalCacheService} from "../../services/local-cache.service";
 import {Shnippit} from "../../model/Shnippit.model";
-import {faCode, faExclamationTriangle, faSearch, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
+import {faCode, faExclamationTriangle, faLock, faSearch, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {BackendService} from "../../services/backend.service";
 import {Router} from "@angular/router";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DeleteShnippitModalComponent} from "../../components/delete-shnippit-modal/delete-shnippit-modal.component";
+import { LoadAllShnippitsModalComponent } from 'src/app/components/load-all-shnippits-modal/load-all-shnippits-modal.component';
 
 @Component({
     selector: 'app-overview',
@@ -22,6 +23,7 @@ export class OverviewComponent implements OnInit {
     deleteIcon = faTrashAlt;
     searchIcon = faSearch;
     errorIcon = faExclamationTriangle;
+    lockIcon = faLock;
 
     constructor(private localCacheService: LocalCacheService,
                 private backendService: BackendService,
@@ -60,12 +62,23 @@ export class OverviewComponent implements OnInit {
         this.shnippits.splice(index, 1);
     }
 
-    openModal(shnippit: Shnippit) {
+    openDeleteDialog(shnippit: Shnippit) {
         const modalRef = this.modalService.open(DeleteShnippitModalComponent, {centered: true});
         modalRef.componentInstance.shnippit = shnippit;
 
         modalRef.result.then(() => {
             this.deleteShnippitFromView(shnippit);
+        }, (reason => {
+
+        }));
+    }
+
+    openLoadAllDialog() {
+        const modalRef = this.modalService.open(LoadAllShnippitsModalComponent, {centered: true});
+        modalRef.result.then((password) => {
+            this.backendService.loadAllShnippits(password).subscribe(shnippits => {
+                this.shnippits = shnippits;
+            })
         }, (reason => {
 
         }));

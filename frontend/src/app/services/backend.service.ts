@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Shnippit} from "../model/Shnippit.model";
 import {Attachment} from "../model/Attachment.model";
 import {LocalCacheService} from "./local-cache.service";
-import {catchError, map, tap} from "rxjs/operators";
+import {catchError, tap} from "rxjs/operators";
 
 @Injectable({
     providedIn: 'root'
@@ -62,4 +62,18 @@ export class BackendService {
     public deleteShnippit(publicId: string): Observable<void> {
         return this.httpClient.delete<void>(`/api/v1/shnippits/${publicId}`);
     }
+
+    public loadAllShnippits(password: string): Observable<Array<Shnippit>> {
+        const requestOptions = {
+            headers: new HttpHeaders({'X-Admin-Token': password}),
+        };
+        return this.httpClient.get<Array<Shnippit>>(`/api/v1/shnippits`, requestOptions).pipe(
+            tap(shnippits =>
+                shnippits.forEach(shnippit =>
+                    this.localCacheService.saveShnippit(shnippit)
+                )
+            )
+        );
+    }
+
 }
